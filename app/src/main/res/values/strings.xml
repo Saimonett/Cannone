@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Cannon</string>
+    <string name="title">Cannon\n</string>
+    <string name="button_play">Play</string>
+    <string name="button_rankings">Rankings</string>
+    <string name="button_instructions">Instructions</string>
+    <string name="button_home">ButtonHome</string>
+</resources>
