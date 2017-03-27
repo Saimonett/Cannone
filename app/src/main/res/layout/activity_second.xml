@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_second">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="Cannon"
+            android:textColor="@color/White"
+            android:gravity="center"
+            android:textSize="50dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3.5" />
+
+        <Button
+            android:id="@+id/button_play"
+            android:text="Play"
+            android:textSize="20dp"
+            android:textColor="@color/White"
+            android:background="@drawable/background_rectangle"
+            android:layout_margin="5dp"
+            android:layout_gravity="center"
+            android:layout_width="176dp"
+            android:layout_height="20dp"
+            android:layout_weight="1.00" />
+
+        <Button
+            android:id="@+id/button_rankings"
+            android:text="Rankings"
+            android:textSize="20dp"
+            android:textColor="@color/White"
+            android:background="@drawable/background_rectangle"
+            android:layout_gravity="center"
+            android:layout_width="176dp"
+            android:layout_height="20dp"
+            android:layout_weight="1.00" />
+        <Button
+            android:id="@+id/button_instructions"
+            android:text="Instructiones"
+            android:textSize="20dp"
+            android:textColor="@color/White"
+            android:background="@drawable/background_rectangle"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="45dp"
+            android:layout_gravity="center"
+            android:layout_width="176dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+</LinearLayout>
