@@ -6,4 +6,5 @@
         android:startColor="@color/Background_DarkBlue"
         android:endColor="@color/Background_LightBlue"
         android:angle="270"/>
+
 </shape>
