@@ -4,8 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="Backgroud_LightBlue">#105162</color>
-    <color name="Backgroud_DarkBlue">#11243f</color>
+    <color name="Background_LightBlue">#105162</color>
+    <color name="Background_DarkBlue">#11243f</color>
 
     <color name="Blue">#1E5CB2</color>
     <color name="LightBlue">#31BDFF</color>
