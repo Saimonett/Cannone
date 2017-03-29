@@ -5,4 +5,8 @@
     <string name="button_rankings">Rankings</string>
     <string name="button_instructions">Instructions</string>
     <string name="button_home">ButtonHome</string>
+
+    <string name="goleft"><![CDATA[<]]></string>
+    <string name="goright"><![CDATA[>]]></string>
+
 </resources>
