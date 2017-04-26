@@ -102,3 +102,7 @@ public class PlayActivity extends Activity implements OnTouchListener{
         System.out.println(mCurrAngle);
     }
 }
+
+
+
+//SNAP calamita

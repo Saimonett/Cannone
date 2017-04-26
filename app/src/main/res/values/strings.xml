@@ -9,4 +9,9 @@
     <string name="goleft"><![CDATA[<]]></string>
     <string name="goright"><![CDATA[>]]></string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="fragment1">1</string>
+    <string name="fragment2">2</string>
+    <string name="fragment3">3</string>
+
 </resources>
