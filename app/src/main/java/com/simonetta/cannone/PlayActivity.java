@@ -39,6 +39,9 @@ public class PlayActivity extends Activity{
     }
 }
  */
+
+
+
 import android.view.View.OnTouchListener;
 
 public class PlayActivity extends Activity implements OnTouchListener{
@@ -52,12 +55,13 @@ public class PlayActivity extends Activity implements OnTouchListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
 
-        wheel=(ImageView)findViewById(R.id.imageView1);
+        wheel=(ImageView)findViewById(R.id.imagecannon);
         wheel.setOnTouchListener(this);
     }
 
     @Override
     public boolean onTouch(final View v, MotionEvent event) {
+        //trova il baricentro
         final float xc = wheel.getWidth() / 2;
         final float yc = wheel.getHeight() / 2;
 
@@ -66,7 +70,7 @@ public class PlayActivity extends Activity implements OnTouchListener{
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN: {
-                wheel.clearAnimation();
+               //wheel.clearAnimation(); //secondo colpo torna a 0
                 mCurrAngle = Math.toDegrees(Math.atan2(x - xc, yc - y));
                 break;
             }
@@ -78,8 +82,33 @@ public class PlayActivity extends Activity implements OnTouchListener{
                 break;
             }
             case MotionEvent.ACTION_UP : {
-                mPrevAngle = mCurrAngle = 0;
-                break;
+
+                mCurrAngle = Math.toDegrees(Math.atan2(x - xc, yc - y));
+
+                if (mCurrAngle <305 && mCurrAngle>235){
+                    mCurrAngle=270;
+                    animate(mPrevAngle, mCurrAngle, 0);
+                }
+
+                if (mCurrAngle <235 && mCurrAngle>167.5){
+                    mCurrAngle=200;
+                    animate(mPrevAngle, mCurrAngle, 0);
+                }
+
+                if (mCurrAngle <167.5 && mCurrAngle>90){
+                    mCurrAngle=135;
+                    animate(mPrevAngle, mCurrAngle, 0);
+                }
+
+                if (mCurrAngle <90 && mCurrAngle>32.5){
+                    mCurrAngle=45;
+                    animate(mPrevAngle, mCurrAngle, 0);
+                }
+              /*  if ((mCurrAngle <32.5 && mCurrAngle>=0)||(mCurrAngle<360 && mCurrAngle>=305)){
+                    mCurrAngle=340;
+                    animate(mPrevAngle, mCurrAngle, 0);
+                }*/
+            break;
             }
         }
         return true;
@@ -93,16 +122,15 @@ public class PlayActivity extends Activity implements OnTouchListener{
         rotate.setFillEnabled(true);
         rotate.setFillAfter(true);
 
-       // if(mCurrAngle<=90 && mCurrAngle>-90) // per settare l'arco di rotazione
-        {
-            wheel.startAnimation(rotate);
-            System.out.println(mCurrAngle);
-        }
+        //per settare l'arco di rotazione
+       /* if(mCurrAngle<=0 && mCurrAngle>180) {
+            animate(45, 45, 0);
+        }*/
+
         wheel.startAnimation(rotate);
         System.out.println(mCurrAngle);
     }
+
 }
-
-
 
 //SNAP calamita
