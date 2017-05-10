@@ -85,23 +85,27 @@ public class PlayActivity extends Activity implements OnTouchListener{
 
                 mCurrAngle = Math.toDegrees(Math.atan2(x - xc, yc - y));
 
-                if (mCurrAngle <305 && mCurrAngle>235){
-                    mCurrAngle=270;
+                if (mCurrAngle >=-125 && mCurrAngle<-55){
+                    mCurrAngle=-90;
                     animate(mPrevAngle, mCurrAngle, 0);
                 }
 
-                if (mCurrAngle <235 && mCurrAngle>167.5){
-                    mCurrAngle=200;
+                else if ((mCurrAngle>167 && mCurrAngle<180)||(mCurrAngle<-125 && mCurrAngle>-180)){
+                    mCurrAngle=-160;
                     animate(mPrevAngle, mCurrAngle, 0);
                 }
 
-                if (mCurrAngle <167.5 && mCurrAngle>90){
+                else if (mCurrAngle <167 && mCurrAngle>=90){
                     mCurrAngle=135;
                     animate(mPrevAngle, mCurrAngle, 0);
                 }
 
-                if (mCurrAngle <90 && mCurrAngle>32.5){
+                else if (mCurrAngle <90 && mCurrAngle>=10){
                     mCurrAngle=45;
+                    animate(mPrevAngle, mCurrAngle, 0);
+                }
+                else{
+                    mCurrAngle=340;
                     animate(mPrevAngle, mCurrAngle, 0);
                 }
               /*  if ((mCurrAngle <32.5 && mCurrAngle>=0)||(mCurrAngle<360 && mCurrAngle>=305)){
