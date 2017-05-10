@@ -46,10 +46,10 @@
                     android:background="@drawable/background_progressbar"
                     />
                 <Button
-                    android:layout_width="70dp"
+                    android:layout_width="80dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="30dp" />
         </LinearLayout>
 </LinearLayout>
 
