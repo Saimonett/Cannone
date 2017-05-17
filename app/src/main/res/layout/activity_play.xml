@@ -12,43 +12,45 @@
             android:layout_weight="3">
 
                 <ImageView
+                    android:id="@+id/imagecannon"
+                    android:layout_width="225sp"
+                    android:layout_height="240sp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/cannon" />
+
+
+                <ImageView
+                    android:id="@+id/imageView2"
                     android:layout_width="510dp"
                     android:layout_height="486dp"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
                     android:src="@drawable/cerchio_gradiente_4" />
-
-                <ImageView
-                    android:id="@+id/imagecannon"
-                    android:layout_width="135sp"
-                    android:layout_height="150sp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center"
-                    android:src="@drawable/icon_arrow" />
         </FrameLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="165dp"
+            android:layout_height="250dp"
             android:layout_weight="1"
             android:orientation="vertical">
-                <ProgressBar
+                <!--<ProgressBar
                     android:id="@+id/progressBar"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="250dp"
                     android:layout_height="25dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/background_progressbar"
-                    />
+                    android:background="@drawable/background_progressbar"/>-->
+
                 <Button
-                    android:layout_width="80dp"
+                    android:layout_width="110dp"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:layout_height="30dp" />
+                    android:layout_height="110dp"
+                    android:background="@drawable/button_play"/>
         </LinearLayout>
 </LinearLayout>
 
