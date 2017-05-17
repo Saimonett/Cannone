@@ -10,6 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3">
+
                 <ImageView
                     android:layout_width="510dp"
                     android:layout_height="486dp"
@@ -22,13 +23,11 @@
                     android:id="@+id/imagecannon"
                     android:layout_width="135sp"
                     android:layout_height="150sp"
-                    android:layout_gravity="center"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/icon_arrow"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_arrow" />
         </FrameLayout>
-
-
 
 
         <LinearLayout
