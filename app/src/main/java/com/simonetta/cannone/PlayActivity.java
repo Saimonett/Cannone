@@ -91,21 +91,21 @@ public class PlayActivity extends Activity implements OnTouchListener{
                 }
 
                 else if ((mCurrAngle>167 && mCurrAngle<180)||(mCurrAngle<-125 && mCurrAngle>-180)){
-                    mCurrAngle=-160;
+                    mCurrAngle=-156;
                     animate(mPrevAngle, mCurrAngle, 0);
                 }
 
                 else if (mCurrAngle <167 && mCurrAngle>=90){
-                    mCurrAngle=135;
+                    mCurrAngle=138;
                     animate(mPrevAngle, mCurrAngle, 0);
                 }
 
                 else if (mCurrAngle <90 && mCurrAngle>=10){
-                    mCurrAngle=45;
+                    mCurrAngle=43;
                     animate(mPrevAngle, mCurrAngle, 0);
                 }
                 else{
-                    mCurrAngle=340;
+                    mCurrAngle=336;
                     animate(mPrevAngle, mCurrAngle, 0);
                 }
               /*  if ((mCurrAngle <32.5 && mCurrAngle>=0)||(mCurrAngle<360 && mCurrAngle>=305)){
