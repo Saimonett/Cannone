@@ -47,10 +47,11 @@
                     android:background="@drawable/background_progressbar"/>-->
 
                 <Button
+                    android:id="@+id/button_shoot"
                     android:layout_width="110dp"
                     android:layout_gravity="center"
                     android:layout_height="110dp"
-                    android:background="@drawable/button_play"/>
+                    android:background="@drawable/button"/>
         </LinearLayout>
 </LinearLayout>
 
