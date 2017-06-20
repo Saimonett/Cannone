@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.LevelListDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -45,14 +47,34 @@ public class PlayActivity extends Activity{
 
 
 import android.view.View.OnTouchListener;
+import android.widget.Toast;
 
-public class PlayActivity extends Activity implements OnTouchListener{
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     private ImageView wheel;
     private double mCurrAngle = 0;
     private double mPrevAngle = 0;
     private Button bShoot;
     LevelListDrawable drawable;
     ImageView bask;
+
+    private int l_primo_t = 51; //lunghezza primo tirante
+    private int l_secondo_t = 133; //lunghezza secondo tirante
+    private int l_terzo_t = 131;
+    private int l_quarto_t = 105;
+    private int l_quinto_t = 97;
+
+    private JSONArray primo_t, secondo_t, terzo_t, quarto_t, quinto_t, mezzo_proiettile;
+
+    private int [][]ragnatela=new int[1072][4];// per ogni px abbiamo 4 colonne che identificano i valori di a, rgb
+    private Handler mNetworkHandler, mMainHandler;
+
+    private NetworkThread mNetworkThread = null;
+    private boolean running=false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +96,7 @@ public class PlayActivity extends Activity implements OnTouchListener{
                                 int level=drawable.getLevel();
                                 if (level>0 && level<6) {
                                     drawable.setLevel(level + 1);
-                                    view.postDelayed(this, 100);
+                                    view.postDelayed(this, 300);
                                 }
                             }
                         }, 100);
@@ -84,6 +106,14 @@ public class PlayActivity extends Activity implements OnTouchListener{
                         if (level>0) {
                             //qui bisogna sparare
                             Log.d("Sparo","Forza :"+level);
+                            try {
+                                for(int j=0;j<(l_primo_t/2);j++){
+                                    mezzo_proiettile = setProiettile(j);
+                                    handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                         drawable.setLevel(0);
                         break;
@@ -96,7 +126,45 @@ public class PlayActivity extends Activity implements OnTouchListener{
                 return true;
             }
         });
+        mMainHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+
+                //QUI bisogna gestire i messaggi che vengono dalla ragnatela
+
+                Toast.makeText(PlayActivity.this, (String) msg.obj, Toast.LENGTH_LONG).show();
+            }
+        };
+        startHandlerThread();
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        running=true;
+        run();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        running=false;
+    }
+
+    public void run() {
+        //qui eseguite le azioni che volete che vengano fatte continuamente
+        Log.d("Tick","tick");
+        //il secondo parametro di postDeleayed indica quanto tempo passa (in millisec) tra un'invocazione e la successiva
+        if (running) mMainHandler.postDelayed(this,1000);
+    }
+
+    public void startHandlerThread() {
+        mNetworkThread = new NetworkThread(mMainHandler);
+        mNetworkThread.start();
+        mNetworkHandler = mNetworkThread.getNetworkHandler();
+    }
+
 
     @Override
     public boolean onTouch(final View v, MotionEvent event) {
@@ -157,6 +225,71 @@ public class PlayActivity extends Activity implements OnTouchListener{
         }
         return true;
     }
+
+
+    private void handleNetworkRequest(int what, Object payload, int arg1, int arg2) {
+        Message msg = mNetworkHandler.obtainMessage();
+        msg.what = what;
+        msg.obj = payload;
+        msg.arg1 = arg1;
+        msg.arg2 = arg2;
+        msg.sendToTarget();
+    }
+
+
+    JSONArray setProiettile(int j){//muoviamo il proiettile in su
+        JSONObject tmp;
+        JSONArray mezzo_proiettile = new JSONArray();
+
+        ragnatela[j][0]=0;// coloriamo i primi 3 led verdi
+        ragnatela[j][1]=0;
+        ragnatela[j][2]=0;
+        ragnatela[j][3]=0;
+
+        ragnatela[j+1][0]=100;// coloriamo i primi 3 led verdi
+        ragnatela[j+1][1]=0;
+        ragnatela[j+1][2]=255;
+        ragnatela[j+1][3]=0;
+
+        ragnatela[j+2][0]=255;// coloriamo i primi 3 led verdi
+        ragnatela[j+2][1]=0;
+        ragnatela[j+2][2]=255;
+        ragnatela[j+2][3]=0;
+
+        // anche gli ultimi si accendono
+
+        ragnatela[l_primo_t-j][0]=0;// coloriamo i primi 3 led verdi
+        ragnatela[l_primo_t-j][1]=0;
+        ragnatela[l_primo_t-j][2]=0;
+        ragnatela[l_primo_t-j][3]=0;
+
+        ragnatela[l_primo_t-j-1][0]=100;// coloriamo i primi 3 led verdi
+        ragnatela[l_primo_t-j-1][1]=0;
+        ragnatela[l_primo_t-j-1][2]=255;
+        ragnatela[l_primo_t-j-1][3]=0;
+
+        ragnatela[l_primo_t-j-2][0]=255;// coloriamo i primi 3 led verdi
+        ragnatela[l_primo_t-j-2][1]=0;
+        ragnatela[l_primo_t-j-2][2]=255;
+        ragnatela[l_primo_t-j-2][3]=0;
+
+        try{
+            for (int i = 0; i < 1072; i++) {
+                tmp = new JSONObject();
+                tmp.put("a", ragnatela[i][0]);
+                tmp.put("r", ragnatela[i][1]);
+                tmp.put("g", ragnatela[i][2]);
+                tmp.put("b", ragnatela[i][3]);
+
+                mezzo_proiettile.put(tmp);
+            }
+        } catch (JSONException exception) {
+            // No errors expected here
+        }
+        return mezzo_proiettile;
+    }
+
+
 
     private void animate(double fromDegrees, double toDegrees, long durationMillis) {
         final RotateAnimation rotate = new RotateAnimation((float) fromDegrees, (float) toDegrees,

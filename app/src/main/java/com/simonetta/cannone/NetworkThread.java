@@ -28,7 +28,7 @@ public class NetworkThread extends HandlerThread {
     private Handler mMainThreadHandler;
     private OkHttpClient okHttpClient = new OkHttpClient();
 
-    private String host_url = "192.168.1.7";
+    private String host_url = "192.168.1.90";
     private int host_port = 8080;
 
     public NetworkThread(Handler mainThreadHandler) {
