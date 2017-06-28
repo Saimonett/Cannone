@@ -23,25 +23,25 @@ import android.widget.ImageView;
 
 /**
  * Created by Simonetta on 22/03/17.
-public class PlayActivity extends Activity{
-    private ImageView cannon;
-    @Override
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play);
+ public class PlayActivity extends Activity{
+ private ImageView cannon;
+ @Override
+ protected void onCreate(Bundle savedInstanceState){
+ super.onCreate(savedInstanceState);
+ setContentView(R.layout.activity_play);
 
-        cannon = new ImageView(this);
-        cannon.setImageDrawable(getResources().getDrawable(R.drawable.cannon));
-        cannon.setRotation(45);
-        setContentView(cannon);
-    }
+ cannon = new ImageView(this);
+ cannon.setImageDrawable(getResources().getDrawable(R.drawable.cannon));
+ cannon.setRotation(45);
+ setContentView(cannon);
+ }
 
-    @Override
-    protected void onResume(){
-        super.onResume();
-        ObjectAnimator.ofFloat(cannon,"rotation",360).setDuration(10000).start();
-    }
-}
+ @Override
+ protected void onResume(){
+ super.onResume();
+ ObjectAnimator.ofFloat(cannon,"rotation",360).setDuration(10000).start();
+ }
+ }
  */
 
 
@@ -176,22 +176,21 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                             //qui bisogna sparare
                             Log.d("Sparo","Forza :"+level);
 
-                          if(pos_cannone==1)   {
-                              try {
+                            if(pos_cannone==1)   {
+                                try {
                                     for(int j=0;j<(l_primo_t/2);j++){
                                         mezzo_proiettile = setProiettile(j);
                                         handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
                                     }
-                              } catch (Exception e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-                          }
+                            }
                             else if(pos_cannone==2)   {
                                 try {
-                                    int led_start_2 = l_primo_t+l_quinto_t+l_quarto_t+l_terzo_t;
+                                    int led_start_2 = l_primo_t + l_quinto_t + l_quarto_t + l_terzo_t;
                                     for(int j=0;j<(l_secondo_t/2);j++){
-                                        mezzo_proiettile_2 = setProiettile2(led_start_2);
-                                        led_start_2++;
+                                        mezzo_proiettile_2 = setProiettile2(led_start_2, j);
                                         handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile_2, 0, 0);
                                     }
                                 } catch (Exception e) {
@@ -199,43 +198,45 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 }
                             }
 
-                             if(pos_cannone==3)   {
-                              try {
-                                    for(int j=0;j<(l_primo_t/2);j++){
-                                        mezzo_proiettile_3 = setProiettile3(j);
+                            if(pos_cannone==3)   {
+                                try {
+                                    int led_start_3 = l_primo_t + l_quinto_t + l_quarto_t;
+                                    for(int j=0;j<(l_terzo_t/2);j++){
+                                        mezzo_proiettile_3 = setProiettile3(led_start_3, j);
                                         handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile_3, 0, 0);
                                     }
-                              } catch (Exception e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-                          }
-                           if(pos_cannone==4)   {
-                              try {
-                                    for(int j=0;j<(l_primo_t/2);j++){
-                                        mezzo_proiettile_4 = setProiettile4(j);
+                            }
+                            if(pos_cannone==4)   {
+                                try {
+                                    int led_start_4 = l_primo_t + l_quinto_t;
+                                    for(int j=0;j<(l_quarto_t/2);j++){
+                                        mezzo_proiettile_4 = setProiettile4(led_start_4, j);
                                         handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile_4, 0, 0);
                                     }
-                              } catch (Exception e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-                          }
-                           if(pos_cannone==5)   {
-                              try {
+                            }
+                            if(pos_cannone==5)   {
+                                try {
                                     for(int j=0;j<(l_quinto_t/2);j++){
-                                        mezzo_proiettile_5 = setProiettile5(j);
+                                        mezzo_proiettile_5 = setProiettile5(l_primo_t,j);
                                         handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile_5, 0, 0);
                                     }
-                              } catch (Exception e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-                          }
+                            }
                         }
                         drawable.setLevel(0);
                         break;
                     case MotionEvent.ACTION_MOVE:
                         if (motionEvent.getX()<0 || motionEvent.getX()>=view.getWidth() ||
-                            motionEvent.getY()<0 || motionEvent.getY()>=view.getHeight())
-                        drawable.setLevel(0);
+                                motionEvent.getY()<0 || motionEvent.getY()>=view.getHeight())
+                            drawable.setLevel(0);
                         break;
                 }
                 return true;
@@ -269,7 +270,37 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
 
     public void run() {
         //qui eseguite le azioni che volete che vengano fatte continuamente
-        Log.d("Tick","tick");
+        //Log.d("Tick","tick");
+        /*JSONArray tmp_anello = new JSONArray();
+        JSONObject tmp_a1 = new JSONObject();
+        for (int i = 0; i < 90; i++) {
+            if (i<522 && i<612){
+            ragnatela[i][0]=255;
+            ragnatela[i][1]=255;
+            ragnatela[i][2]=0;
+            ragnatela[i][3]=0;
+            } else
+            {
+                ragnatela[i][0]=0;
+                ragnatela[i][1]=0;
+                ragnatela[i][2]=0;
+                ragnatela[i][3]=0;
+            }
+
+            try{
+                tmp_a1.put("a", ragnatela[i][0]);
+                tmp_a1.put("r", ragnatela[i][1]);
+                tmp_a1.put("g", ragnatela[i][2]);
+                tmp_a1.put("b", ragnatela[i][3]);
+
+            } catch (JSONException exception) {
+                // No errors expected here
+            }
+        }
+        tmp_anello.put(tmp_a1);
+        handleNetworkRequest(NetworkThread.SET_PIXELS, tmp_anello, 0, 0);
+*/
+
         //il secondo parametro di postDeleayed indica quanto tempo passa (in millisec) tra un'invocazione e la successiva
         if (running) mMainHandler.postDelayed(this,1000);
     }
@@ -312,20 +343,20 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
 
         // anche gli ultimi si accendono
 
-        ragnatela[l_primo_t-j][0]=0;// coloriamo i primi 3 led verdi
-        ragnatela[l_primo_t-j][1]=0;
-        ragnatela[l_primo_t-j][2]=0;
-        ragnatela[l_primo_t-j][3]=0;
-
-        ragnatela[l_primo_t-j-1][0]=100;// coloriamo i primi 3 led verdi
+        ragnatela[l_primo_t-j-1][0]=0;// coloriamo i primi 3 led verdi
         ragnatela[l_primo_t-j-1][1]=0;
-        ragnatela[l_primo_t-j-1][2]=255;
+        ragnatela[l_primo_t-j-1][2]=0;
         ragnatela[l_primo_t-j-1][3]=0;
 
-        ragnatela[l_primo_t-j-2][0]=255;// coloriamo i primi 3 led verdi
+        ragnatela[l_primo_t-j-2][0]=100;// coloriamo i primi 3 led verdi
         ragnatela[l_primo_t-j-2][1]=0;
         ragnatela[l_primo_t-j-2][2]=255;
         ragnatela[l_primo_t-j-2][3]=0;
+
+        ragnatela[l_primo_t-j-3][0]=255;// coloriamo i primi 3 led verdi
+        ragnatela[l_primo_t-j-3][1]=0;
+        ragnatela[l_primo_t-j-3][2]=255;
+        ragnatela[l_primo_t-j-3][3]=0;
 
         try{
             for (int i = 0; i < 1072; i++) {
@@ -343,41 +374,41 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         return mezzo_proiettile;
     }
 
-    JSONArray setProiettile2(int j){//muoviamo il proiettile in su
+    JSONArray setProiettile2(int j, int count){//muoviamo il proiettile in su
         JSONObject tmp2;
         JSONArray mezzo_proiettile_2 = new JSONArray();
 
-        ragnatela[j][0]=0;// coloriamo i primi 3 led verdi
-        ragnatela[j][1]=0;
-        ragnatela[j][2]=0;
-        ragnatela[j][3]=0;
+        ragnatela[j+count][0]=0;// coloriamo i primi 3 led verdi
+        ragnatela[j+count][1]=0;
+        ragnatela[j+count][2]=0;
+        ragnatela[j+count][3]=0;
 
-        ragnatela[j+1][0]=100;// coloriamo i primi 3 led verdi
-        ragnatela[j+1][1]=0;
-        ragnatela[j+1][2]=255;
-        ragnatela[j+1][3]=0;
+        ragnatela[j+count+1][0]=100;// coloriamo i primi 3 led verdi
+        ragnatela[j+count+1][1]=0;
+        ragnatela[j+count+1][2]=255;
+        ragnatela[j+count+1][3]=0;
 
-        ragnatela[j+2][0]=255;// coloriamo i primi 3 led verdi
-        ragnatela[j+2][1]=0;
-        ragnatela[j+2][2]=255;
-        ragnatela[j+2][3]=0;
+        ragnatela[j+count+2][0]=255;// coloriamo i primi 3 led verdi
+        ragnatela[j+count+2][1]=0;
+        ragnatela[j+count+2][2]=255;
+        ragnatela[j+count+2][3]=0;
 
         // anche gli ultimi si accendono
 
-        ragnatela[l_secondo_t-j][0]=0;// coloriamo i primi 3 led verdi
-        ragnatela[l_secondo_t-j][1]=0;
-        ragnatela[l_secondo_t-j][2]=0;
-        ragnatela[l_secondo_t-j][3]=0;
+        ragnatela[j+l_secondo_t-count+2][0]=0;// coloriamo i primi 3 led verdi
+        ragnatela[j+l_secondo_t-count+2][1]=0;
+        ragnatela[j+l_secondo_t-count+2][2]=0;
+        ragnatela[j+l_secondo_t-count+2][3]=0;
 
-        ragnatela[l_secondo_t-j-1][0]=100;// coloriamo i primi 3 led verdi
-        ragnatela[l_secondo_t-j-1][1]=0;
-        ragnatela[l_secondo_t-j-1][2]=255;
-        ragnatela[l_secondo_t-j-1][3]=0;
+        ragnatela[j+l_secondo_t-count+1][0]=100;// coloriamo i primi 3 led verdi
+        ragnatela[j+l_secondo_t-count+1][1]=0;
+        ragnatela[j+l_secondo_t-count+1][2]=255;
+        ragnatela[j+l_secondo_t-count+1][3]=0;
 
-        ragnatela[l_secondo_t-j-2][0]=255;// coloriamo i primi 3 led verdi
-        ragnatela[l_secondo_t-j-2][1]=0;
-        ragnatela[l_secondo_t-j-2][2]=255;
-        ragnatela[l_secondo_t-j-2][3]=0;
+        ragnatela[j+l_secondo_t-count][0]=255;// coloriamo i primi 3 led verdi
+        ragnatela[j+l_secondo_t-count][1]=0;
+        ragnatela[j+l_secondo_t-count][2]=255;
+        ragnatela[j+l_secondo_t-count][3]=0;
 
         try{
             for (int i = 0; i < 1072; i++) {
@@ -395,41 +426,41 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         return mezzo_proiettile_2;
     }
 
-        JSONArray setProiettile3(int j){//muoviamo il proiettile in su
+    JSONArray setProiettile3(int j, int count){//muoviamo il proiettile in su
         JSONObject tmp3;
         JSONArray mezzo_proiettile_3 = new JSONArray();
 
-        ragnatela[j][0]=0;// coloriamo i primi 3 led verdi
-        ragnatela[j][1]=0;
-        ragnatela[j][2]=0;
-        ragnatela[j][3]=0;
+        ragnatela[j+count][0]=0;// coloriamo i primi 3 led verdi
+        ragnatela[j+count][1]=0;
+        ragnatela[j+count][2]=0;
+        ragnatela[j+count][3]=0;
 
-        ragnatela[j+1][0]=100;// coloriamo i primi 3 led verdi
-        ragnatela[j+1][1]=0;
-        ragnatela[j+1][2]=255;
-        ragnatela[j+1][3]=0;
+        ragnatela[j+count+1][0]=100;// coloriamo i primi 3 led verdi
+        ragnatela[j+count+1][1]=0;
+        ragnatela[j+count+1][2]=255;
+        ragnatela[j+count+1][3]=0;
 
-        ragnatela[j+2][0]=255;// coloriamo i primi 3 led verdi
-        ragnatela[j+2][1]=0;
-        ragnatela[j+2][2]=255;
-        ragnatela[j+2][3]=0;
+        ragnatela[j+count+2][0]=255;// coloriamo i primi 3 led verdi
+        ragnatela[j+count+2][1]=0;
+        ragnatela[j+count+2][2]=255;
+        ragnatela[j+count+2][3]=0;
 
         // anche gli ultimi si accendono
 
-        ragnatela[l_terzo_t-j][0]=0;// coloriamo i primi 3 led verdi
-        ragnatela[l_terzo_t-j][1]=0;
-        ragnatela[l_terzo_t-j][2]=0;
-        ragnatela[l_terzo_t-j][3]=0;
+        ragnatela[j+l_terzo_t-count+1][0]=0;// coloriamo i primi 3 led verdi
+        ragnatela[j+l_terzo_t-count+1][1]=0;
+        ragnatela[j+l_terzo_t-count+1][2]=0;
+        ragnatela[j+l_terzo_t-count+1][3]=0;
 
-        ragnatela[l_terzo_t-j-1][0]=100;// coloriamo i primi 3 led verdi
-        ragnatela[l_terzo_t-j-1][1]=0;
-        ragnatela[l_terzo_t-j-1][2]=255;
-        ragnatela[l_terzo_t-j-1][3]=0;
+        ragnatela[j+l_terzo_t-count][0]=100;// coloriamo i primi 3 led verdi
+        ragnatela[j+l_terzo_t-count][1]=0;
+        ragnatela[j+l_terzo_t-count][2]=255;
+        ragnatela[j+l_terzo_t-count][3]=0;
 
-        ragnatela[l_terzo_t-j-2][0]=255;// coloriamo i primi 3 led verdi
-        ragnatela[l_terzo_t-j-2][1]=0;
-        ragnatela[l_terzo_t-j-2][2]=255;
-        ragnatela[l_terzo_t-j-2][3]=0;
+        ragnatela[j+l_terzo_t-count-1][0]=255;// coloriamo i primi 3 led verdi
+        ragnatela[j+l_terzo_t-count-1][1]=0;
+        ragnatela[j+l_terzo_t-count-1][2]=255;
+        ragnatela[j+l_terzo_t-count-1][3]=0;
 
         try{
             for (int i = 0; i < 1072; i++) {
@@ -445,45 +476,43 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
             // No errors expected here
         }
         return mezzo_proiettile_3;
-        }
+    }
 
-
-
-        JSONArray setProiettile4(int j){//muoviamo il proiettile in su
+    JSONArray setProiettile4(int j, int count){//muoviamo il proiettile in su
         JSONObject tmp4;
         JSONArray mezzo_proiettile_4 = new JSONArray();
 
-        ragnatela[j][0]=0;// coloriamo i primi 3 led verdi
-        ragnatela[j][1]=0;
-        ragnatela[j][2]=0;
-        ragnatela[j][3]=0;
+        ragnatela[j+count][0]=0;// coloriamo i primi 3 led verdi
+        ragnatela[j+count][1]=0;
+        ragnatela[j+count][2]=0;
+        ragnatela[j+count][3]=0;
 
-        ragnatela[j+1][0]=100;// coloriamo i primi 3 led verdi
-        ragnatela[j+1][1]=0;
-        ragnatela[j+1][2]=255;
-        ragnatela[j+1][3]=0;
+        ragnatela[j+count+1][0]=100;// coloriamo i primi 3 led verdi
+        ragnatela[j+count+1][1]=0;
+        ragnatela[j+count+1][2]=255;
+        ragnatela[j+count+1][3]=0;
 
-        ragnatela[j+2][0]=255;// coloriamo i primi 3 led verdi
-        ragnatela[j+2][1]=0;
-        ragnatela[j+2][2]=255;
-        ragnatela[j+2][3]=0;
+        ragnatela[j+count+2][0]=255;// coloriamo i primi 3 led verdi
+        ragnatela[j+count+2][1]=0;
+        ragnatela[j+count+2][2]=255;
+        ragnatela[j+count+2][3]=0;
 
         // anche gli ultimi si accendono
 
-        ragnatela[l_quarto_t-j][0]=0;// coloriamo i primi 3 led verdi
-        ragnatela[l_quarto_t-j][1]=0;
-        ragnatela[l_quarto_t-j][2]=0;
-        ragnatela[l_quarto_t-j][3]=0;
+        ragnatela[j+l_quarto_t-count+1][0]=0;// coloriamo i primi 3 led verdi
+        ragnatela[j+l_quarto_t-count+1][1]=0;
+        ragnatela[j+l_quarto_t-count+1][2]=0;
+        ragnatela[j+l_quarto_t-count+1][3]=0;
 
-        ragnatela[l_quarto_t-j-1][0]=100;// coloriamo i primi 3 led verdi
-        ragnatela[l_quarto_t-j-1][1]=0;
-        ragnatela[l_quarto_t-j-1][2]=255;
-        ragnatela[l_quarto_t-j-1][3]=0;
+        ragnatela[j+l_quarto_t-count][0]=100;// coloriamo i primi 3 led verdi
+        ragnatela[j+l_quarto_t-count][1]=0;
+        ragnatela[j+l_quarto_t-count][2]=255;
+        ragnatela[j+l_quarto_t-count][3]=0;
 
-        ragnatela[l_quarto_t-j-2][0]=255;// coloriamo i primi 3 led verdi
-        ragnatela[l_quarto_t-j-2][1]=0;
-        ragnatela[l_quarto_t-j-2][2]=255;
-        ragnatela[l_quarto_t-j-2][3]=0;
+        ragnatela[j+l_quarto_t-count-1][0]=255;// coloriamo i primi 3 led verdi
+        ragnatela[j+l_quarto_t-count-1][1]=0;
+        ragnatela[j+l_quarto_t-count-1][2]=255;
+        ragnatela[j+l_quarto_t-count-1][3]=0;
 
         try{
             for (int i = 0; i < 1072; i++) {
@@ -501,41 +530,41 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         return mezzo_proiettile_4;
     }
 
-    JSONArray setProiettile5(int j){//muoviamo il proiettile in su
+    JSONArray setProiettile5(int j,int count){//muoviamo il proiettile in su
         JSONObject tmp5;
         JSONArray mezzo_proiettile_5 = new JSONArray();
 
-        ragnatela[j][0]=0;// coloriamo i primi 3 led verdi
-        ragnatela[j][1]=0;
-        ragnatela[j][2]=0;
-        ragnatela[j][3]=0;
+        ragnatela[j+count][0]=0;// coloriamo i primi 3 led verdi
+        ragnatela[j+count][1]=0;
+        ragnatela[j+count][2]=0;
+        ragnatela[j+count][3]=0;
 
-        ragnatela[j+1][0]=100;// coloriamo i primi 3 led verdi
-        ragnatela[j+1][1]=0;
-        ragnatela[j+1][2]=255;
-        ragnatela[j+1][3]=0;
+        ragnatela[j+count+1][0]=100;// coloriamo i primi 3 led verdi
+        ragnatela[j+count+1][1]=0;
+        ragnatela[j+count+1][2]=255;
+        ragnatela[j+count+1][3]=0;
 
-        ragnatela[j+2][0]=255;// coloriamo i primi 3 led verdi
-        ragnatela[j+2][1]=0;
-        ragnatela[j+2][2]=255;
-        ragnatela[j+2][3]=0;
+        ragnatela[j+count+2][0]=255;// coloriamo i primi 3 led verdi
+        ragnatela[j+count+2][1]=0;
+        ragnatela[j+count+2][2]=255;
+        ragnatela[j+count+2][3]=0;
 
         // anche gli ultimi si accendono
 
-        ragnatela[l_quinto_t-j][0]=0;// coloriamo i primi 3 led verdi
-        ragnatela[l_quinto_t-j][1]=0;
-        ragnatela[l_quinto_t-j][2]=0;
-        ragnatela[l_quinto_t-j][3]=0;
+        ragnatela[j+l_quinto_t-count+1][0]=0;// coloriamo i primi 3 led verdi
+        ragnatela[j+l_quinto_t-count+1][1]=0;
+        ragnatela[j+l_quinto_t-count+1][2]=0;
+        ragnatela[j+l_quinto_t-count+1][3]=0;
 
-        ragnatela[l_quinto_t-j-1][0]=100;// coloriamo i primi 3 led verdi
-        ragnatela[l_quinto_t-j-1][1]=0;
-        ragnatela[l_quinto_t-j-1][2]=255;
-        ragnatela[l_quinto_t-j-1][3]=0;
+        ragnatela[j+l_quinto_t-count][0]=100;// coloriamo i primi 3 led verdi
+        ragnatela[j+l_quinto_t-count][1]=0;
+        ragnatela[j+l_quinto_t-count][2]=255;
+        ragnatela[j+l_quinto_t-count][3]=0;
 
-        ragnatela[l_quinto_t-j-2][0]=255;// coloriamo i primi 3 led verdi
-        ragnatela[l_quinto_t-j-2][1]=0;
-        ragnatela[l_quinto_t-j-2][2]=255;
-        ragnatela[l_quinto_t-j-2][3]=0;
+        ragnatela[j+l_quinto_t-count-1][0]=255;// coloriamo i primi 3 led verdi
+        ragnatela[j+l_quinto_t-count-1][1]=0;
+        ragnatela[j+l_quinto_t-count-1][2]=255;
+        ragnatela[j+l_quinto_t-count-1][3]=0;
 
         try{
             for (int i = 0; i < 1072; i++) {
@@ -552,6 +581,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         }
         return mezzo_proiettile_5;
     }
+
 
     private void animate(double fromDegrees, double toDegrees, long durationMillis) {
         final RotateAnimation rotate = new RotateAnimation((float) fromDegrees, (float) toDegrees,
@@ -572,4 +602,3 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
 
 }
 
-//SNAP calamita
