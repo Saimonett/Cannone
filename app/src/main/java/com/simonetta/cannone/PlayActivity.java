@@ -74,6 +74,10 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     private int led_start_4 = l_primo_t+l_quinto_t;
     private int led_start_5 = l_primo_t;
 
+    private int led_start_anello1 = l_primo_t+l_quinto_t+l_quarto_t+l_terzo_t+l_secondo_t;
+    private int led_start_anello2 = l_primo_t+l_quinto_t+l_quarto_t+l_terzo_t+l_secondo_t+led_start_anello1;
+
+
     private JSONArray primo_t, secondo_t, terzo_t, quarto_t, quinto_t, mezzo_proiettile, mezzo_proiettile_2, mezzo_proiettile_3, mezzo_proiettile_4, mezzo_proiettile_5;
 
     private int [][]ragnatela=new int[1072][4];// per ogni px abbiamo 4 colonne che identificano i valori di a, rgb
@@ -143,7 +147,6 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         }
         return true;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -254,7 +257,6 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         startHandlerThread();
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -271,35 +273,35 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     public void run() {
         //qui eseguite le azioni che volete che vengano fatte continuamente
         //Log.d("Tick","tick");
-        /*JSONArray tmp_anello = new JSONArray();
+        JSONArray tmp_anello = new JSONArray();
         JSONObject tmp_a1 = new JSONObject();
-        for (int i = 0; i < 90; i++) {
-            if (i<522 && i<612){
-            ragnatela[i][0]=255;
-            ragnatela[i][1]=255;
-            ragnatela[i][2]=0;
-            ragnatela[i][3]=0;
+        for (int i = 2; i < 552; i++) {
+            if (i<612){
+
+                ragnatela[i+led_start_anello1][0]=255;// coloriamo i primi 3 led verdi
+                ragnatela[i+led_start_anello1][1]=255;
+                ragnatela[i+led_start_anello1][2]=0;
+                ragnatela[i+led_start_anello1][3]=0;
             } else
             {
-                ragnatela[i][0]=0;
-                ragnatela[i][1]=0;
-                ragnatela[i][2]=0;
-                ragnatela[i][3]=0;
+                ragnatela[i+led_start_anello1][0]=255;// coloriamo i primi 3 led verdi
+                ragnatela[i+led_start_anello1][1]=0;
+                ragnatela[i+led_start_anello1][2]=0;
+                ragnatela[i+led_start_anello1][3]=0;
             }
-
             try{
                 tmp_a1.put("a", ragnatela[i][0]);
                 tmp_a1.put("r", ragnatela[i][1]);
                 tmp_a1.put("g", ragnatela[i][2]);
                 tmp_a1.put("b", ragnatela[i][3]);
 
+                tmp_anello.put(tmp_a1);
             } catch (JSONException exception) {
                 // No errors expected here
             }
         }
-        tmp_anello.put(tmp_a1);
+
         handleNetworkRequest(NetworkThread.SET_PIXELS, tmp_anello, 0, 0);
-*/
 
         //il secondo parametro di postDeleayed indica quanto tempo passa (in millisec) tra un'invocazione e la successiva
         if (running) mMainHandler.postDelayed(this,1000);
@@ -311,7 +313,6 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         mNetworkHandler = mNetworkThread.getNetworkHandler();
     }
 
-
     private void handleNetworkRequest(int what, Object payload, int arg1, int arg2) {
         Message msg = mNetworkHandler.obtainMessage();
         msg.what = what;
@@ -320,7 +321,6 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         msg.arg2 = arg2;
         msg.sendToTarget();
     }
-
 
     JSONArray setProiettile(int j){//muoviamo il proiettile in su
         JSONObject tmp;
@@ -373,7 +373,6 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         }
         return mezzo_proiettile;
     }
-
     JSONArray setProiettile2(int j, int count){//muoviamo il proiettile in su
         JSONObject tmp2;
         JSONArray mezzo_proiettile_2 = new JSONArray();
@@ -425,7 +424,6 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         }
         return mezzo_proiettile_2;
     }
-
     JSONArray setProiettile3(int j, int count){//muoviamo il proiettile in su
         JSONObject tmp3;
         JSONArray mezzo_proiettile_3 = new JSONArray();
@@ -477,7 +475,6 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         }
         return mezzo_proiettile_3;
     }
-
     JSONArray setProiettile4(int j, int count){//muoviamo il proiettile in su
         JSONObject tmp4;
         JSONArray mezzo_proiettile_4 = new JSONArray();
@@ -529,7 +526,6 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         }
         return mezzo_proiettile_4;
     }
-
     JSONArray setProiettile5(int j,int count){//muoviamo il proiettile in su
         JSONObject tmp5;
         JSONArray mezzo_proiettile_5 = new JSONArray();
