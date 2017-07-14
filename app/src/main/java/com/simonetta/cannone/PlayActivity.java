@@ -76,6 +76,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
 
     private int led_start_anello1 = l_primo_t+l_quinto_t+l_quarto_t+l_terzo_t+l_secondo_t;
     private int led_start_anello2 = l_primo_t+l_quinto_t+l_quarto_t+l_terzo_t+l_secondo_t+led_start_anello1;
+    private int led_start_anello3 = l_primo_t+l_quinto_t+l_quarto_t+l_terzo_t+l_secondo_t+led_start_anello1+led_start_anello2;
 
 
     private JSONArray primo_t, secondo_t, terzo_t, quarto_t, quinto_t, mezzo_proiettile, mezzo_proiettile_2, mezzo_proiettile_3, mezzo_proiettile_4, mezzo_proiettile_5;
@@ -273,18 +274,23 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     public void run() {
         //qui eseguite le azioni che volete che vengano fatte continuamente
         //Log.d("Tick","tick");
-        JSONArray tmp_anello = new JSONArray();
+         JSONArray tmp_anello = new JSONArray();
         JSONObject tmp_a1 = new JSONObject();
-        for (int i = 2; i < 552; i++) {
-            if (i<612){
 
-                ragnatela[i+led_start_anello1][0]=255;// coloriamo i primi 3 led verdi
+        JSONArray tmp_anello2 = new JSONArray();
+        JSONObject tmp_a2 = new JSONObject();
+
+        //271 a 552 anello 3
+        //93 a 279 anello 2
+        //2 a 92 anello 1
+       for (int i = 2; i < 550; i++) {
+            if (i<93){
+                ragnatela[i+led_start_anello1][0]=255;
                 ragnatela[i+led_start_anello1][1]=255;
                 ragnatela[i+led_start_anello1][2]=0;
                 ragnatela[i+led_start_anello1][3]=0;
-            } else
-            {
-                ragnatela[i+led_start_anello1][0]=255;// coloriamo i primi 3 led verdi
+            } else {
+                ragnatela[i+led_start_anello1][0]=255;
                 ragnatela[i+led_start_anello1][1]=0;
                 ragnatela[i+led_start_anello1][2]=0;
                 ragnatela[i+led_start_anello1][3]=0;
@@ -300,9 +306,9 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                 // No errors expected here
             }
         }
-
+/*
         handleNetworkRequest(NetworkThread.SET_PIXELS, tmp_anello, 0, 0);
-
+*/
         //il secondo parametro di postDeleayed indica quanto tempo passa (in millisec) tra un'invocazione e la successiva
         if (running) mMainHandler.postDelayed(this,1000);
     }
