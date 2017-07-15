@@ -280,20 +280,29 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         JSONArray tmp_anello2 = new JSONArray();
         JSONObject tmp_a2 = new JSONObject();
 
+        JSONArray tmp_anello3 = new JSONArray();
+        JSONObject tmp_a3 = new JSONObject();
+
         //271 a 552 anello 3
-        //93 a 279 anello 2
+        //93 a 270 anello 2
         //2 a 92 anello 1
-       for (int i = 2; i < 550; i++) {
-            if (i<93){
+
+       for (int i = 2; i < 552; i++) {
+            if (i<89){
                 ragnatela[i+led_start_anello1][0]=255;
                 ragnatela[i+led_start_anello1][1]=255;
                 ragnatela[i+led_start_anello1][2]=0;
                 ragnatela[i+led_start_anello1][3]=0;
-            } else {
+            } else if(i>=93 && i<263) {
+                ragnatela[i+led_start_anello1][0]=255;
+                ragnatela[i+led_start_anello1][1]=0;
+                ragnatela[i+led_start_anello1][2]=255;
+                ragnatela[i+led_start_anello1][3]=0;
+            }else if (i>=271 && i<532){
                 ragnatela[i+led_start_anello1][0]=255;
                 ragnatela[i+led_start_anello1][1]=0;
                 ragnatela[i+led_start_anello1][2]=0;
-                ragnatela[i+led_start_anello1][3]=0;
+                ragnatela[i+led_start_anello1][3]=255;
             }
             try{
                 tmp_a1.put("a", ragnatela[i][0]);
@@ -301,7 +310,19 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                 tmp_a1.put("g", ragnatela[i][2]);
                 tmp_a1.put("b", ragnatela[i][3]);
 
+                tmp_a2.put("a", ragnatela[i][0]);
+                tmp_a2.put("r", ragnatela[i][1]);
+                tmp_a2.put("g", ragnatela[i][2]);
+                tmp_a2.put("b", ragnatela[i][3]);
+
+                tmp_a3.put("a", ragnatela[i][0]);
+                tmp_a3.put("r", ragnatela[i][1]);
+                tmp_a3.put("g", ragnatela[i][2]);
+                tmp_a3.put("b", ragnatela[i][3]);
+
                 tmp_anello.put(tmp_a1);
+                tmp_anello2.put(tmp_a2);
+                tmp_anello3.put(tmp_a3);
             } catch (JSONException exception) {
                 // No errors expected here
             }
@@ -310,7 +331,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         handleNetworkRequest(NetworkThread.SET_PIXELS, tmp_anello, 0, 0);
 */
         //il secondo parametro di postDeleayed indica quanto tempo passa (in millisec) tra un'invocazione e la successiva
-        if (running) mMainHandler.postDelayed(this,1000);
+        if (running) mMainHandler.postDelayed(this,1000000000);
     }
 
     public void startHandlerThread() {
