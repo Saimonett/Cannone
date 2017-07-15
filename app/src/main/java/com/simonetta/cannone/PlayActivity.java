@@ -169,7 +169,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 int level=drawable.getLevel();
                                 if (level>0 && level<6) {
                                     drawable.setLevel(level + 1);
-                                    view.postDelayed(this, 300);
+                                    view.postDelayed(this, 200);
                                 }
                             }
                         }, 100);
@@ -342,9 +342,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
            }
 
 //Sposto il buco
-// NON FUNZIONA 
-           for (int j = 0; j < 40; j++){
-
+           for (int j = 0; j < 86; j++){
             g++;
             ragnatela[g+led_start_anello1][0]=255;
             ragnatela[g+led_start_anello1][1]=255;
@@ -367,8 +365,56 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                } catch (JSONException exception) {
                    // No errors expected here
                }
+            }
 
+        for (int j = 0; j < 169; j++){
+            b++;
+            ragnatela[b+led_start_anello1][0]=255;
+            ragnatela[b+led_start_anello1][1]=0;
+            ragnatela[b+led_start_anello1][2]=255;
+            ragnatela[b+led_start_anello1][3]=0;
 
+            c++;
+            ragnatela[c+led_start_anello1][0]=255;
+            ragnatela[c+led_start_anello1][1]=0;
+            ragnatela[c+led_start_anello1][2]=0;
+            ragnatela[c+led_start_anello1][3]=0;
+
+            try{
+                tmp_a2.put("a", ragnatela[b][0]);
+                tmp_a2.put("r", ragnatela[b][1]);
+                tmp_a2.put("g", ragnatela[b][2]);
+                tmp_a2.put("b", ragnatela[b][3]);
+
+                tmp_anello2.put(tmp_a2);
+            } catch (JSONException exception) {
+                // No errors expected here
+            }
+        }
+
+        for (int j = 0; j < 264; j++){
+            d++;
+            ragnatela[d+led_start_anello1][0]=255;
+            ragnatela[d+led_start_anello1][1]=0;
+            ragnatela[d+led_start_anello1][2]=0;
+            ragnatela[d+led_start_anello1][3]=255;
+
+            e++;
+            ragnatela[e+led_start_anello1][0]=255;
+            ragnatela[e+led_start_anello1][1]=0;
+            ragnatela[e+led_start_anello1][2]=0;
+            ragnatela[e+led_start_anello1][3]=0;
+
+            try{
+                tmp_a3.put("a", ragnatela[d][0]);
+                tmp_a3.put("r", ragnatela[d][1]);
+                tmp_a3.put("g", ragnatela[d][2]);
+                tmp_a3.put("b", ragnatela[d][3]);
+
+                tmp_anello3.put(tmp_a3);
+            } catch (JSONException exception) {
+                // No errors expected here
+            }
         }
 /*
         handleNetworkRequest(NetworkThread.SET_PIXELS, tmp_anello, 0, 0);
