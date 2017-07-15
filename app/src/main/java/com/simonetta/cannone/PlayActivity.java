@@ -283,49 +283,92 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         JSONArray tmp_anello3 = new JSONArray();
         JSONObject tmp_a3 = new JSONObject();
 
+
+
+
         //271 a 552 anello 3
         //93 a 270 anello 2
         //2 a 92 anello 1
 
-       for (int i = 2; i < 552; i++) {
-            if (i<89){
-                ragnatela[i+led_start_anello1][0]=255;
-                ragnatela[i+led_start_anello1][1]=255;
-                ragnatela[i+led_start_anello1][2]=0;
-                ragnatela[i+led_start_anello1][3]=0;
-            } else if(i>=93 && i<263) {
-                ragnatela[i+led_start_anello1][0]=255;
-                ragnatela[i+led_start_anello1][1]=0;
-                ragnatela[i+led_start_anello1][2]=255;
-                ragnatela[i+led_start_anello1][3]=0;
-            }else if (i>=271 && i<532){
-                ragnatela[i+led_start_anello1][0]=255;
-                ragnatela[i+led_start_anello1][1]=0;
-                ragnatela[i+led_start_anello1][2]=0;
-                ragnatela[i+led_start_anello1][3]=255;
-            }
-            try{
-                tmp_a1.put("a", ragnatela[i][0]);
-                tmp_a1.put("r", ragnatela[i][1]);
-                tmp_a1.put("g", ragnatela[i][2]);
-                tmp_a1.put("b", ragnatela[i][3]);
+        int a = 6;//inzio primo cerchio
+        int b = 93; //inizio buco primo cerchio
+        int c = 100; //fine buco primo cerchio
+        int d = 270;//inzio secondo primo cerchio
+        int e = 287;//inzio secondo primo cerchio
+        int f = 552;//inzio buco terzo cerchio
+        int g = 2;
 
-                tmp_a2.put("a", ragnatela[i][0]);
-                tmp_a2.put("r", ragnatela[i][1]);
-                tmp_a2.put("g", ragnatela[i][2]);
-                tmp_a2.put("b", ragnatela[i][3]);
 
-                tmp_a3.put("a", ragnatela[i][0]);
-                tmp_a3.put("r", ragnatela[i][1]);
-                tmp_a3.put("g", ragnatela[i][2]);
-                tmp_a3.put("b", ragnatela[i][3]);
+        //faccio gli anelli con il buco
+           for (int i = g; i < 552; i++) {
+                if (i>a && i<b){
+                    ragnatela[i+led_start_anello1][0]=255;
+                    ragnatela[i+led_start_anello1][1]=255;
+                    ragnatela[i+led_start_anello1][2]=0;
+                    ragnatela[i+led_start_anello1][3]=0;
+                } else if(i>=c && i<d) {
+                    ragnatela[i+led_start_anello1][0]=255;
+                    ragnatela[i+led_start_anello1][1]=0;
+                    ragnatela[i+led_start_anello1][2]=255;
+                    ragnatela[i+led_start_anello1][3]=0;
+                }else if (i>=e && i<f){
+                    ragnatela[i+led_start_anello1][0]=255;
+                    ragnatela[i+led_start_anello1][1]=0;
+                    ragnatela[i+led_start_anello1][2]=0;
+                    ragnatela[i+led_start_anello1][3]=255;
+                }
+                try{
+                    tmp_a1.put("a", ragnatela[i][0]);
+                    tmp_a1.put("r", ragnatela[i][1]);
+                    tmp_a1.put("g", ragnatela[i][2]);
+                    tmp_a1.put("b", ragnatela[i][3]);
 
-                tmp_anello.put(tmp_a1);
-                tmp_anello2.put(tmp_a2);
-                tmp_anello3.put(tmp_a3);
-            } catch (JSONException exception) {
-                // No errors expected here
-            }
+                    tmp_a2.put("a", ragnatela[i][0]);
+                    tmp_a2.put("r", ragnatela[i][1]);
+                    tmp_a2.put("g", ragnatela[i][2]);
+                    tmp_a2.put("b", ragnatela[i][3]);
+
+                    tmp_a3.put("a", ragnatela[i][0]);
+                    tmp_a3.put("r", ragnatela[i][1]);
+                    tmp_a3.put("g", ragnatela[i][2]);
+                    tmp_a3.put("b", ragnatela[i][3]);
+
+                    tmp_anello.put(tmp_a1);
+                    tmp_anello2.put(tmp_a2);
+                    tmp_anello3.put(tmp_a3);
+                } catch (JSONException exception) {
+                    // No errors expected here
+                }
+           }
+
+//Sposto il buco
+// NON FUNZIONA 
+           for (int j = 0; j < 40; j++){
+
+            g++;
+            ragnatela[g+led_start_anello1][0]=255;
+            ragnatela[g+led_start_anello1][1]=255;
+            ragnatela[g+led_start_anello1][2]=0;
+            ragnatela[g+led_start_anello1][3]=0;
+
+            a++;
+            ragnatela[a+led_start_anello1][0]=255;
+            ragnatela[a+led_start_anello1][1]=0;
+            ragnatela[a+led_start_anello1][2]=0;
+            ragnatela[a+led_start_anello1][3]=0;
+
+               try{
+                   tmp_a1.put("a", ragnatela[g][0]);
+                   tmp_a1.put("r", ragnatela[g][1]);
+                   tmp_a1.put("g", ragnatela[g][2]);
+                   tmp_a1.put("b", ragnatela[g][3]);
+
+                   tmp_anello.put(tmp_a1);
+               } catch (JSONException exception) {
+                   // No errors expected here
+               }
+
+
         }
 /*
         handleNetworkRequest(NetworkThread.SET_PIXELS, tmp_anello, 0, 0);
