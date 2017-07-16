@@ -2,6 +2,7 @@ package com.simonetta.cannone;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.LevelListDrawable;
@@ -79,7 +80,12 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     private int led_start_anello2 = l_primo_t+l_quinto_t+l_quarto_t+l_terzo_t+l_secondo_t+led_start_anello1;
     private int led_start_anello3 = l_primo_t+l_quinto_t+l_quarto_t+l_terzo_t+l_secondo_t+led_start_anello1+led_start_anello2;
 
-    int punteggio = 0;
+    int punteggioTotale = 0;
+    int punteggio1 = 0;
+    int punteggio2 = 0;
+    int punteggio3 = 0;
+    int punteggio4 = 0;
+    int punteggio5 = 0;
 
     private JSONArray primo_t, secondo_t, terzo_t, quarto_t, quinto_t, mezzo_proiettile, mezzo_proiettile_2, mezzo_proiettile_3, mezzo_proiettile_4, mezzo_proiettile_5;
 
@@ -284,10 +290,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
 
         JSONArray tmp_anello3 = new JSONArray();
         JSONObject tmp_a3 = new JSONObject();
-
-
-
-
+        
         //271 a 552 anello 3
         //93 a 270 anello 2
         //2 a 92 anello 1
@@ -301,7 +304,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         int g = 2;
 
 
-        //faccio gli anelli con il buco
+//faccio gli anelli con il buco
         for (int i = g; i < 552; i++) {
             if (i>a && i<b){
                 ragnatela[i+led_start_anello1][0]=255;
@@ -440,7 +443,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         msg.sendToTarget();
     }
 
-    JSONArray setProiettile(int j){//muoviamo il proiettile in su
+    JSONArray setProiettile(int j){//il j di setProiettile equivale al count degli altri setProiettile2,3,4,5
         JSONObject tmp;
         JSONArray mezzo_proiettile = new JSONArray();
 
@@ -448,7 +451,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
             if((ragnatela[led_start_anello1][1]!=0) ||(ragnatela[led_start_anello1][2]!=0) || (ragnatela[led_start_anello1][3]!=0)){
                 gameOver(j);
             }else {
-                punteggio+=7;
+                punteggio1+=7;
                Log.d("Tick","tick");
             }
         }
@@ -457,7 +460,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
             if((ragnatela[led_start_anello2][1]!=0) ||(ragnatela[led_start_anello2][2]!=0) || (ragnatela[led_start_anello2][3]!=0)){
                 gameOver(j);
             }else {
-                punteggio+=7;
+                punteggio1+=7;
                 Log.d("Tick","tick");
             }
         }
@@ -466,7 +469,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
             if((ragnatela[led_start_anello3][1]!=0) ||(ragnatela[led_start_anello3][2]!=0) || (ragnatela[led_start_anello3][3]!=0)){
                 gameOver(j);
             }else {
-                punteggio+=7;
+                punteggio1+=7;
                 Log.d("Tick","tick");
             }
         }
@@ -522,29 +525,29 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         JSONObject tmp2;
         JSONArray mezzo_proiettile_2 = new JSONArray();
 
-        if (j==led_start_2+1){
-            if((ragnatela[led_start_anello2-18][1]!=0) ||(ragnatela[led_start_anello2-18][2]!=0) || (ragnatela[led_start_anello2-18][3]!=0)){
-                gameOver(j);
+        if (count==1){
+            if((ragnatela[led_start_anello2-18][1]!=0) || (ragnatela[led_start_anello2-18][2]!=0) || (ragnatela[led_start_anello2-18][3]!=0)){
+                gameOver(count);
             }else {
-                punteggio+=7;
+                punteggio2+=7;
                Log.d("Tick","tick");
             }
         }
 
-        if (j==led_start_2+9){
+        if (count==9){
             if((ragnatela[led_start_anello3-33][1]!=0) ||(ragnatela[led_start_anello3-33][2]!=0) || (ragnatela[led_start_anello3-33][3]!=0)){
-                gameOver(j);
+                gameOver(count);
             }else {
-                punteggio+=7;
+                punteggio2+=7;
                 Log.d("Tick","tick");
             }
         }
 
-        if (j==led_start_2+19){
+        if (count==19){
             if((ragnatela[552-51][1]!=0) ||(ragnatela[552-51][2]!=0) || (ragnatela[552-51][3]!=0)){
-                gameOver(j);
+                gameOver(count);
             }else {
-                punteggio+=7;
+                punteggio2+=7;
                 Log.d("Tick","tick");
             }
         }
@@ -600,29 +603,29 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         JSONObject tmp3;
         JSONArray mezzo_proiettile_3 = new JSONArray();
 
-        if (j==led_start_3+1){
+        if (count==1){
             if((ragnatela[led_start_anello2+79][1]!=0) ||(ragnatela[led_start_anello2+79][2]!=0) || (ragnatela[led_start_anello2+79][3]!=0)){
-                gameOver(j);
+                gameOver(count);
             }else {
-                punteggio+=7;
+                punteggio3+=7;
                 Log.d("Tick","tick");
             }
         }
 
-        if (j==led_start_3+9){
+        if (count==9){
             if((ragnatela[led_start_anello3+179][1]!=0) ||(ragnatela[led_start_anello3+179][2]!=0) || (ragnatela[led_start_anello3+179][3]!=0)){
-                gameOver(j);
+                gameOver(count);
             }else {
-                punteggio+=7;
+                punteggio3+=7;
                 Log.d("Tick","tick");
             }
         }
 
-        if (j==led_start_3+19){
+        if (count==19){
             if((ragnatela[led_start_anello3+322][1]!=0) ||(ragnatela[led_start_anello3+322][2]!=0) || (ragnatela[led_start_anello3+322][3]!=0)){
-                gameOver(j);
+                gameOver(count);
             }else {
-                punteggio+=7;
+                punteggio3+=7;
                 Log.d("Tick","tick");
             }
         }
@@ -678,29 +681,29 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         JSONObject tmp4;
         JSONArray mezzo_proiettile_4 = new JSONArray();
 
-        if (j==led_start_4+1){
+        if (count==1){
             if((ragnatela[led_start_anello2+46][1]!=0) ||(ragnatela[led_start_anello2+46][2]!=0) || (ragnatela[led_start_anello2+46][3]!=0)){
-                gameOver(j);
+                gameOver(count);
             }else {
-                punteggio+=7;
+                punteggio4+=7;
                 Log.d("Tick","tick");
             }
         }
 
-        if (j==led_start_4+9){
+        if (count==9){
             if((ragnatela[led_start_anello3-33][1]!=0) ||(ragnatela[led_start_anello3-33][2]!=0) || (ragnatela[led_start_anello3-33][3]!=0)){
-                gameOver(j);
+                gameOver(count);
             }else {
-                punteggio+=7;
+                punteggio4+=7;
                 Log.d("Tick","tick");
             }
         }
 
-        if (j==led_start_4+19){
+        if (count==19){
             if((ragnatela[led_start_anello3+112][1]!=0) ||(ragnatela[led_start_anello3+112][2]!=0) || (ragnatela[led_start_anello3+112][3]!=0)){
-                gameOver(j);
+                gameOver(count);
             }else {
-                punteggio+=7;
+                punteggio4+=7;
                 Log.d("Tick","tick");
             }
         }
@@ -757,29 +760,29 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         JSONArray mezzo_proiettile_5 = new JSONArray();
 
 
-        if (j==led_start_5+1){
+        if (count==1){
             if((ragnatela[led_start_anello1+16][1]!=0) ||(ragnatela[led_start_anello1+16][2]!=0) || (ragnatela[led_start_anello1+16][3]!=0)){
-                gameOver(j);
+                gameOver(count);
             }else {
-                punteggio+=7;
+                punteggio5+=7;
                Log.d("Tick","tick");
             }
         }
 
-        if (j==led_start_5+9){
+        if (count==9){
             if((ragnatela[led_start_anello2+35][1]!=0) ||(ragnatela[led_start_anello2+35][2]!=0) || (ragnatela[led_start_anello2+35][3]!=0)){
-                gameOver(j);
+                gameOver(count);
             }else {
-                punteggio+=7;
+                punteggio5+=7;
                 Log.d("Tick","tick");
             }
         }
 
-        if (j==led_start_5+19){
+        if (count==19){
             if((ragnatela[led_start_anello3+5][1]!=0) ||(ragnatela[led_start_anello3+5][2]!=0) || (ragnatela[led_start_anello3+5][3]!=0)){
-                gameOver(j);
+                gameOver(count);
             }else {
-                punteggio+=7;
+                punteggio5+=7;
                 Log.d("Tick","tick");
             }
         }
@@ -854,6 +857,15 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
 
     private void gameOver(int j){
         Log.d("TickGameOver","tickGameOver");
+        punteggioTotale=punteggio1+punteggio2+punteggio3+punteggio4+punteggio5;
+
+        Intent activity_game = new Intent(PlayActivity.this, GameOver.class);
+        activity_game.putExtra("messagePunti", punteggioTotale);
+        startActivity(activity_game);
+
+        punteggioTotale=0;
+
+
     }
 }
 
