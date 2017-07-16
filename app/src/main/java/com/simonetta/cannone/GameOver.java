@@ -23,7 +23,7 @@ public class GameOver extends AppCompatActivity {
         int punteggioLivello = datiPassati.getIntExtra("messagePunti",0);
 
         TextView tvPunti = (TextView) findViewById(R.id.punteggioTot);
-        tvPunti.setText( punteggioLivello+"punti" );
+        tvPunti.setText( punteggioLivello + "punti" );
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

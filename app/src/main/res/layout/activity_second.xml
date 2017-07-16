@@ -22,7 +22,7 @@
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3.5" />
+            android:layout_weight="5" />
 
         <Button
             android:id="@+id/button_play"
@@ -35,7 +35,7 @@
             android:layout_width="176dp"
             android:layout_height="20dp"
             android:layout_weight="1.00" />
-
+<!--
         <Button
             android:id="@+id/button_rankings"
             android:text="Rankings"
@@ -45,7 +45,7 @@
             android:layout_gravity="center"
             android:layout_width="176dp"
             android:layout_height="20dp"
-            android:layout_weight="1.00" />
+            android:layout_weight="1.00" />-->
         <Button
             android:id="@+id/button_instructions"
             android:text="Instructiones"

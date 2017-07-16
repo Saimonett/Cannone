@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.simonetta.cannone.GameOver"
-    tools:showIn="@layout/activity_game_over">
+    android:background="@drawable/background_instructionesactivity">
 
     <LinearLayout
         android:layout_width="344dp"
@@ -15,30 +12,36 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="105dp"
-            android:text="GAME OVER"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GAME OVER!"
+            android:textColor="@color/White"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:paddingTop="100dp"
             android:textSize="44sp"
-            android:layout_weight="1"
+            android:layout_weight="0.28"
             android:layout_gravity="center"
             />
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Score:"
+            android:textColor="@color/White"
             android:textSize="33sp"
-            android:layout_weight="1"
+            android:padding="0dp"
+            android:layout_margin="0dp"
             android:layout_gravity="center"/>
 
         <TextView
             android:id="@+id/punteggioTot"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textSize="33sp"
-            android:layout_weight="1"
+            android:textColor="@color/White"
+            android:layout_weight="0.16"
             android:layout_gravity="center"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
