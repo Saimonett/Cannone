@@ -25,14 +25,14 @@ public class SecondActivity extends Activity {
             }
         });
 
-        Button button_rankings = (Button) findViewById(R.id.button_rankings);
+        /*Button button_rankings = (Button) findViewById(R.id.button_rankings);
         button_rankings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent activity_second = new Intent(SecondActivity.this, RankingsActivity.class);
                 startActivity(activity_second);
             }
-        });
+        });*/
 
         Button button_instructions = (Button) findViewById(R.id.button_instructions);
         button_instructions.setOnClickListener(new View.OnClickListener() {
