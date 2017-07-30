@@ -1,26 +1,27 @@
 package com.simonetta.cannone;
 
-import android.animation.ObjectAnimator;
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.LevelListDrawable;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
-import android.view.animation.ScaleAnimation;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
+        import android.animation.ObjectAnimator;
+        import android.app.Activity;
+        import android.content.Intent;
+        import android.graphics.Bitmap;
+        import android.graphics.BitmapFactory;
+        import android.graphics.Color;
+        import android.graphics.drawable.LevelListDrawable;
+        import android.os.Bundle;
+        import android.os.Handler;
+        import android.os.Message;
+        import android.util.Log;
+        import android.view.Menu;
+        import android.view.MotionEvent;
+        import android.view.View;
+        import android.view.View.OnClickListener;
+        import android.view.animation.Animation;
+        import android.view.animation.AnimationUtils;
+        import android.view.animation.RotateAnimation;
+        import android.view.animation.ScaleAnimation;
+        import android.widget.Button;
+        import android.widget.ImageButton;
+        import android.widget.ImageView;
 
 /**
  * Created by Simonetta on 22/03/17.
@@ -47,12 +48,12 @@ import android.widget.ImageView;
 
 
 
-import android.view.View.OnTouchListener;
-import android.widget.Toast;
+        import android.view.View.OnTouchListener;
+        import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+        import org.json.JSONArray;
+        import org.json.JSONException;
+        import org.json.JSONObject;
 
 public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     private ImageView wheel;
@@ -127,29 +128,34 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                     mCurrAngle=-90;
                     animate(mPrevAngle, mCurrAngle, 0);
                     pos_cannone = 1;
+                    setDisplayPixels();
                 }
 
                 else if ((mCurrAngle>167 && mCurrAngle<180)||(mCurrAngle<-125 && mCurrAngle>-180)){
                     mCurrAngle=-156;
                     animate(mPrevAngle, mCurrAngle, 0);
                     pos_cannone = 2;
+                    setDisplayPixels5();
                 }
 
                 else if (mCurrAngle <167 && mCurrAngle>=90){
                     mCurrAngle=138;
                     animate(mPrevAngle, mCurrAngle, 0);
                     pos_cannone = 3;
+                    setDisplayPixels3();
                 }
 
                 else if (mCurrAngle <90 && mCurrAngle>=10){
                     mCurrAngle=43;
                     animate(mPrevAngle, mCurrAngle, 0);
                     pos_cannone = 4;
+                    setDisplayPixels4();
                 }
                 else{
                     mCurrAngle=336;
                     animate(mPrevAngle, mCurrAngle, 0);
                     pos_cannone = 5;
+                    setDisplayPixels2();
                 }
                 break;
             }
@@ -290,7 +296,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
 
         JSONArray tmp_anello3 = new JSONArray();
         JSONObject tmp_a3 = new JSONObject();
-        
+
         //271 a 552 anello 3
         //93 a 270 anello 2
         //2 a 92 anello 1
@@ -328,19 +334,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                 tmp_a1.put("g", ragnatela[i][2]);
                 tmp_a1.put("b", ragnatela[i][3]);
 
-                tmp_a2.put("a", ragnatela[i][0]);
-                tmp_a2.put("r", ragnatela[i][1]);
-                tmp_a2.put("g", ragnatela[i][2]);
-                tmp_a2.put("b", ragnatela[i][3]);
-
-                tmp_a3.put("a", ragnatela[i][0]);
-                tmp_a3.put("r", ragnatela[i][1]);
-                tmp_a3.put("g", ragnatela[i][2]);
-                tmp_a3.put("b", ragnatela[i][3]);
-
                 tmp_anello.put(tmp_a1);
-                tmp_anello2.put(tmp_a2);
-                tmp_anello3.put(tmp_a3);
             } catch (JSONException exception) {
                 // No errors expected here
             }
@@ -386,12 +380,12 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
             ragnatela[c+led_start_anello1][3]=0;
 
             try{
-                tmp_a2.put("a", ragnatela[b][0]);
-                tmp_a2.put("r", ragnatela[b][1]);
-                tmp_a2.put("g", ragnatela[b][2]);
-                tmp_a2.put("b", ragnatela[b][3]);
+                tmp_a1.put("a", ragnatela[g][0]);
+                tmp_a1.put("r", ragnatela[g][1]);
+                tmp_a1.put("g", ragnatela[g][2]);
+                tmp_a1.put("b", ragnatela[g][3]);
 
-                tmp_anello2.put(tmp_a2);
+                tmp_anello.put(tmp_a1);
             } catch (JSONException exception) {
                 // No errors expected here
             }
@@ -411,19 +405,19 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
             ragnatela[e+led_start_anello1][3]=0;
 
             try{
-                tmp_a3.put("a", ragnatela[d][0]);
-                tmp_a3.put("r", ragnatela[d][1]);
-                tmp_a3.put("g", ragnatela[d][2]);
-                tmp_a3.put("b", ragnatela[d][3]);
+                tmp_a1.put("a", ragnatela[g][0]);
+                tmp_a1.put("r", ragnatela[g][1]);
+                tmp_a1.put("g", ragnatela[g][2]);
+                tmp_a1.put("b", ragnatela[g][3]);
 
-                tmp_anello3.put(tmp_a3);
+                tmp_anello.put(tmp_a1);
             } catch (JSONException exception) {
                 // No errors expected here
             }
         }
-/*
-        handleNetworkRequest(NetworkThread.SET_PIXELS, tmp_anello, 0, 0);
-*/
+
+       // handleNetworkRequest(NetworkThread.SET_PIXELS, tmp_anello, 0, 0);
+
         //il secondo parametro di postDeleayed indica quanto tempo passa (in millisec) tra un'invocazione e la successiva
         if (running) mMainHandler.postDelayed(this,1000000000);
     }
@@ -446,13 +440,13 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     JSONArray setProiettile(int j){//il j di setProiettile equivale al count degli altri setProiettile2,3,4,5
         JSONObject tmp;
         JSONArray mezzo_proiettile = new JSONArray();
-
+/*
         if (j==1){
             if((ragnatela[led_start_anello1][1]!=0) ||(ragnatela[led_start_anello1][2]!=0) || (ragnatela[led_start_anello1][3]!=0)){
                 gameOver(j);
             }else {
                 punteggio1+=7;
-               Log.d("Tick","tick");
+                Log.d("Tick","tick");
             }
         }
 
@@ -473,7 +467,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                 Log.d("Tick","tick");
             }
         }
-
+*/
         ragnatela[j][0]=0;// coloriamo i primi 3 led verdi
         ragnatela[j][1]=0;
         ragnatela[j][2]=0;
@@ -524,13 +518,13 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     JSONArray setProiettile2(int j, int count){//muoviamo il proiettile in su
         JSONObject tmp2;
         JSONArray mezzo_proiettile_2 = new JSONArray();
-
+/*
         if (count==1){
             if((ragnatela[led_start_anello2-18][1]!=0) || (ragnatela[led_start_anello2-18][2]!=0) || (ragnatela[led_start_anello2-18][3]!=0)){
                 gameOver(count);
             }else {
                 punteggio2+=7;
-               Log.d("Tick","tick");
+                Log.d("Tick","tick");
             }
         }
 
@@ -551,7 +545,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                 Log.d("Tick","tick");
             }
         }
-
+*/
         ragnatela[j+count][0]=0;// coloriamo i primi 3 led verdi
         ragnatela[j+count][1]=0;
         ragnatela[j+count][2]=0;
@@ -602,7 +596,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     JSONArray setProiettile3(int j, int count){//muoviamo il proiettile in su
         JSONObject tmp3;
         JSONArray mezzo_proiettile_3 = new JSONArray();
-
+/*
         if (count==1){
             if((ragnatela[led_start_anello2+79][1]!=0) ||(ragnatela[led_start_anello2+79][2]!=0) || (ragnatela[led_start_anello2+79][3]!=0)){
                 gameOver(count);
@@ -629,7 +623,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                 Log.d("Tick","tick");
             }
         }
-
+*/
         ragnatela[j+count][0]=0;// coloriamo i primi 3 led verdi
         ragnatela[j+count][1]=0;
         ragnatela[j+count][2]=0;
@@ -680,7 +674,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     JSONArray setProiettile4(int j, int count){//muoviamo il proiettile in su
         JSONObject tmp4;
         JSONArray mezzo_proiettile_4 = new JSONArray();
-
+/*
         if (count==1){
             if((ragnatela[led_start_anello2+46][1]!=0) ||(ragnatela[led_start_anello2+46][2]!=0) || (ragnatela[led_start_anello2+46][3]!=0)){
                 gameOver(count);
@@ -707,7 +701,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                 Log.d("Tick","tick");
             }
         }
-
+*/
         ragnatela[j+count][0]=0;// coloriamo i primi 3 led verdi
         ragnatela[j+count][1]=0;
         ragnatela[j+count][2]=0;
@@ -759,13 +753,13 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         JSONObject tmp5;
         JSONArray mezzo_proiettile_5 = new JSONArray();
 
-
+/*
         if (count==1){
             if((ragnatela[led_start_anello1+16][1]!=0) ||(ragnatela[led_start_anello1+16][2]!=0) || (ragnatela[led_start_anello1+16][3]!=0)){
                 gameOver(count);
             }else {
                 punteggio5+=7;
-               Log.d("Tick","tick");
+                Log.d("Tick","tick");
             }
         }
 
@@ -786,7 +780,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                 Log.d("Tick","tick");
             }
         }
-
+*/
 
 
         ragnatela[j+count][0]=0;// coloriamo i primi 3 led verdi
@@ -867,5 +861,148 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
 
 
     }
+
+    void setDisplayPixels(){
+        try{
+            JSONArray pixels_array = new JSONArray();
+            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannone_pos1);
+            tempBMP=Bitmap.createScaledBitmap(tempBMP,32,32,false);
+            int[]pixels = new int [tempBMP.getHeight()*tempBMP.getWidth()];
+            tempBMP.getPixels(pixels, 0, tempBMP.getWidth(), 0, 0, tempBMP.getWidth(), tempBMP.getHeight());
+            for (int i =0; i<pixels.length; i++){
+                int pixel = pixels[i];
+
+                int redValue = Color.red(pixel);
+                int blueValue = Color.blue(pixel);
+                int greenValue = Color.green(pixel);
+
+                JSONObject tmp = new JSONObject();
+                tmp.put("r",redValue);
+                tmp.put("g",greenValue);
+                tmp.put("b",blueValue);
+                tmp.put("a",0);
+
+                pixels_array.put(tmp);
+            }
+
+            handleNetworkRequest(NetworkThread.SET_DISPLAY_PIXELS,pixels_array,0,0);
+        }catch (JSONException e){
+
+        }
+    }
+    void setDisplayPixels2(){
+        try{
+            JSONArray pixels_array = new JSONArray();
+            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannone_pos2);
+            tempBMP=Bitmap.createScaledBitmap(tempBMP,32,32,false);
+            int[]pixels = new int [tempBMP.getHeight()*tempBMP.getWidth()];
+            tempBMP.getPixels(pixels, 0, tempBMP.getWidth(), 0, 0, tempBMP.getWidth(), tempBMP.getHeight());
+            for (int i =0; i<pixels.length; i++){
+                int pixel = pixels[i];
+
+                int redValue = Color.red(pixel);
+                int blueValue = Color.blue(pixel);
+                int greenValue = Color.green(pixel);
+
+                JSONObject tmp = new JSONObject();
+                tmp.put("r",redValue);
+                tmp.put("g",greenValue);
+                tmp.put("b",blueValue);
+                tmp.put("a",0);
+
+                pixels_array.put(tmp);
+            }
+
+            handleNetworkRequest(NetworkThread.SET_DISPLAY_PIXELS,pixels_array,0,0);
+        }catch (JSONException e){
+
+        }
+    }
+    void setDisplayPixels3(){
+        try{
+            JSONArray pixels_array = new JSONArray();
+            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannone_pos3);
+            tempBMP=Bitmap.createScaledBitmap(tempBMP,32,32,false);
+            int[]pixels = new int [tempBMP.getHeight()*tempBMP.getWidth()];
+            tempBMP.getPixels(pixels, 0, tempBMP.getWidth(), 0, 0, tempBMP.getWidth(), tempBMP.getHeight());
+            for (int i =0; i<pixels.length; i++){
+                int pixel = pixels[i];
+
+                int redValue = Color.red(pixel);
+                int blueValue = Color.blue(pixel);
+                int greenValue = Color.green(pixel);
+
+                JSONObject tmp = new JSONObject();
+                tmp.put("r",redValue);
+                tmp.put("g",greenValue);
+                tmp.put("b",blueValue);
+                tmp.put("a",0);
+
+                pixels_array.put(tmp);
+            }
+
+            handleNetworkRequest(NetworkThread.SET_DISPLAY_PIXELS,pixels_array,0,0);
+        }catch (JSONException e){
+
+        }
+    }
+    void setDisplayPixels4(){
+        try{
+            JSONArray pixels_array = new JSONArray();
+            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannone_pos4);
+            tempBMP=Bitmap.createScaledBitmap(tempBMP,32,32,false);
+            int[]pixels = new int [tempBMP.getHeight()*tempBMP.getWidth()];
+            tempBMP.getPixels(pixels, 0, tempBMP.getWidth(), 0, 0, tempBMP.getWidth(), tempBMP.getHeight());
+            for (int i =0; i<pixels.length; i++){
+                int pixel = pixels[i];
+
+                int redValue = Color.red(pixel);
+                int blueValue = Color.blue(pixel);
+                int greenValue = Color.green(pixel);
+
+                JSONObject tmp = new JSONObject();
+                tmp.put("r",redValue);
+                tmp.put("g",greenValue);
+                tmp.put("b",blueValue);
+                tmp.put("a",0);
+
+                pixels_array.put(tmp);
+            }
+
+            handleNetworkRequest(NetworkThread.SET_DISPLAY_PIXELS,pixels_array,0,0);
+        }catch (JSONException e){
+
+        }
+    }
+    void setDisplayPixels5(){
+        try{
+            JSONArray pixels_array = new JSONArray();
+            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannone_pos5);
+            tempBMP=Bitmap.createScaledBitmap(tempBMP,32,32,false);
+            int[]pixels = new int [tempBMP.getHeight()*tempBMP.getWidth()];
+            tempBMP.getPixels(pixels, 0, tempBMP.getWidth(), 0, 0, tempBMP.getWidth(), tempBMP.getHeight());
+            for (int i =0; i<pixels.length; i++){
+                int pixel = pixels[i];
+
+                int redValue = Color.red(pixel);
+                int blueValue = Color.blue(pixel);
+                int greenValue = Color.green(pixel);
+
+                JSONObject tmp = new JSONObject();
+                tmp.put("r",redValue);
+                tmp.put("g",greenValue);
+                tmp.put("b",blueValue);
+                tmp.put("a",0);
+
+                pixels_array.put(tmp);
+            }
+
+            handleNetworkRequest(NetworkThread.SET_DISPLAY_PIXELS,pixels_array,0,0);
+        }catch (JSONException e){
+
+        }
+    }
+
+
 }
 
