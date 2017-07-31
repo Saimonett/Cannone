@@ -189,6 +189,8 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                         }, 100);
                         break;
                     case MotionEvent.ACTION_UP:
+
+
                         int level=drawable.getLevel();
                         if (level>4) {
                             //qui bisogna sparare
@@ -196,6 +198,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
 
                             if(pos_cannone==1)   {
                                 try {
+
                                     for(int j=0;j<(l_primo_t/2);j++){
                                         mezzo_proiettile = setProiettile(j);
                                         handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
@@ -276,7 +279,9 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     protected void onResume() {
         super.onResume();
         running=true;
-        run();
+        //while(true) {
+            run();
+        //}
     }
 
     @Override
@@ -286,140 +291,12 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     }
 
     public void run() {
-        //qui eseguite le azioni che volete che vengano fatte continuamente
-        //Log.d("Tick","tick");
-        JSONArray tmp_anello = new JSONArray();
-        JSONObject tmp_a1 = new JSONObject();
+        Log.d("Sparo","GIOVANNI");
+        coloraAnelli();
 
-        JSONArray tmp_anello2 = new JSONArray();
-        JSONObject tmp_a2 = new JSONObject();
+       // mMainHandler.postDelayed(this,5000);
+        coloraBuco ();
 
-        JSONArray tmp_anello3 = new JSONArray();
-        JSONObject tmp_a3 = new JSONObject();
-
-        //271 a 552 anello 3
-        //93 a 270 anello 2
-        //2 a 92 anello 1
-
-        int a = 6;//inzio primo cerchio
-        int b = 93; //inizio buco primo cerchio
-        int c = 100; //fine buco primo cerchio
-        int d = 270;//inzio secondo primo cerchio
-        int e = 287;//inzio secondo primo cerchio
-        int f = 552;//inzio buco terzo cerchio
-        int g = 2;
-
-
-//faccio gli anelli con il buco
-        for (int i = g; i < 552; i++) {
-            if (i>a && i<b){
-                ragnatela[i+led_start_anello1][0]=255;
-                ragnatela[i+led_start_anello1][1]=255;
-                ragnatela[i+led_start_anello1][2]=0;
-                ragnatela[i+led_start_anello1][3]=0;
-            } else if(i>=c && i<d) {
-                ragnatela[i+led_start_anello1][0]=255;
-                ragnatela[i+led_start_anello1][1]=0;
-                ragnatela[i+led_start_anello1][2]=255;
-                ragnatela[i+led_start_anello1][3]=0;
-            }else if (i>=e && i<f){
-                ragnatela[i+led_start_anello1][0]=255;
-                ragnatela[i+led_start_anello1][1]=0;
-                ragnatela[i+led_start_anello1][2]=0;
-                ragnatela[i+led_start_anello1][3]=255;
-            }
-            try{
-                tmp_a1.put("a", ragnatela[i][0]);
-                tmp_a1.put("r", ragnatela[i][1]);
-                tmp_a1.put("g", ragnatela[i][2]);
-                tmp_a1.put("b", ragnatela[i][3]);
-
-                tmp_anello.put(tmp_a1);
-            } catch (JSONException exception) {
-                // No errors expected here
-            }
-        }
-
-//Sposto il buco
-        for (int j = 0; j < 86; j++){
-            g++;
-            ragnatela[g+led_start_anello1][0]=255;
-            ragnatela[g+led_start_anello1][1]=255;
-            ragnatela[g+led_start_anello1][2]=0;
-            ragnatela[g+led_start_anello1][3]=0;
-
-            a++;
-            ragnatela[a+led_start_anello1][0]=255;
-            ragnatela[a+led_start_anello1][1]=0;
-            ragnatela[a+led_start_anello1][2]=0;
-            ragnatela[a+led_start_anello1][3]=0;
-
-            try{
-                tmp_a1.put("a", ragnatela[g][0]);
-                tmp_a1.put("r", ragnatela[g][1]);
-                tmp_a1.put("g", ragnatela[g][2]);
-                tmp_a1.put("b", ragnatela[g][3]);
-
-                tmp_anello.put(tmp_a1);
-            } catch (JSONException exception) {
-                // No errors expected here
-            }
-        }
-
-        for (int j = 0; j < 169; j++){
-            b++;
-            ragnatela[b+led_start_anello1][0]=255;
-            ragnatela[b+led_start_anello1][1]=0;
-            ragnatela[b+led_start_anello1][2]=255;
-            ragnatela[b+led_start_anello1][3]=0;
-
-            c++;
-            ragnatela[c+led_start_anello1][0]=255;
-            ragnatela[c+led_start_anello1][1]=0;
-            ragnatela[c+led_start_anello1][2]=0;
-            ragnatela[c+led_start_anello1][3]=0;
-
-            try{
-                tmp_a1.put("a", ragnatela[g][0]);
-                tmp_a1.put("r", ragnatela[g][1]);
-                tmp_a1.put("g", ragnatela[g][2]);
-                tmp_a1.put("b", ragnatela[g][3]);
-
-                tmp_anello.put(tmp_a1);
-            } catch (JSONException exception) {
-                // No errors expected here
-            }
-        }
-
-        for (int j = 0; j < 264; j++){
-            d++;
-            ragnatela[d+led_start_anello1][0]=255;
-            ragnatela[d+led_start_anello1][1]=0;
-            ragnatela[d+led_start_anello1][2]=0;
-            ragnatela[d+led_start_anello1][3]=255;
-
-            e++;
-            ragnatela[e+led_start_anello1][0]=255;
-            ragnatela[e+led_start_anello1][1]=0;
-            ragnatela[e+led_start_anello1][2]=0;
-            ragnatela[e+led_start_anello1][3]=0;
-
-            try{
-                tmp_a1.put("a", ragnatela[g][0]);
-                tmp_a1.put("r", ragnatela[g][1]);
-                tmp_a1.put("g", ragnatela[g][2]);
-                tmp_a1.put("b", ragnatela[g][3]);
-
-                tmp_anello.put(tmp_a1);
-            } catch (JSONException exception) {
-                // No errors expected here
-            }
-        }
-
-       // handleNetworkRequest(NetworkThread.SET_PIXELS, tmp_anello, 0, 0);
-
-        //il secondo parametro di postDeleayed indica quanto tempo passa (in millisec) tra un'invocazione e la successiva
-        if (running) mMainHandler.postDelayed(this,1000000000);
     }
 
     public void startHandlerThread() {
@@ -439,7 +316,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
 
     JSONArray setProiettile(int j){//il j di setProiettile equivale al count degli altri setProiettile2,3,4,5
         JSONObject tmp;
-        JSONArray mezzo_proiettile = new JSONArray();
+        JSONArray simonetta = new JSONArray();
 /*
         if (j==1){
             if((ragnatela[led_start_anello1][1]!=0) ||(ragnatela[led_start_anello1][2]!=0) || (ragnatela[led_start_anello1][3]!=0)){
@@ -508,12 +385,12 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                 tmp.put("g", ragnatela[i][2]);
                 tmp.put("b", ragnatela[i][3]);
 
-                mezzo_proiettile.put(tmp);
+                simonetta.put(tmp);
             }
         } catch (JSONException exception) {
             // No errors expected here
         }
-        return mezzo_proiettile;
+        return simonetta;
     }
     JSONArray setProiettile2(int j, int count){//muoviamo il proiettile in su
         JSONObject tmp2;
@@ -1003,6 +880,179 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         }
     }
 
+    void coloraAnelli(){
 
+        JSONArray tmp_anello = new JSONArray();
+        JSONObject tmp_a1 = new JSONObject();
+
+        int c = 100; //fine buco primo cerchio
+        int d = 270;//inzio secondo primo cerchio
+        int e = 287;//inzio secondo primo cerchio
+        int f = 552;//inzio buco terzo cerchio
+        int g = 2;
+
+
+//faccio gli anelli con il buco
+        for (int i = g; i < 552; i++) {
+            if (i>0 && i<93){
+                ragnatela[i+led_start_anello1][0]=255;
+                ragnatela[i+led_start_anello1][1]=255;
+                ragnatela[i+led_start_anello1][2]=0;
+                ragnatela[i+led_start_anello1][3]=0;
+            } else if(i>=93 && i<271) {
+                ragnatela[i+led_start_anello1][0]=255;
+                ragnatela[i+led_start_anello1][1]=0;
+                ragnatela[i+led_start_anello1][2]=255;
+                ragnatela[i+led_start_anello1][3]=0;
+            }else if (i>=271 && i<552){
+                ragnatela[i+led_start_anello1][0]=255;
+                ragnatela[i+led_start_anello1][1]=0;
+                ragnatela[i+led_start_anello1][2]=0;
+                ragnatela[i+led_start_anello1][3]=255;
+            }
+            try{
+                tmp_a1.put("a", ragnatela[i][0]);
+                tmp_a1.put("r", ragnatela[i][1]);
+                tmp_a1.put("g", ragnatela[i][2]);
+                tmp_a1.put("b", ragnatela[i][3]);
+
+                tmp_anello.put(tmp_a1);
+            } catch (JSONException exception) {
+                // No errors expected here
+            }
+        }
+
+        for(int j=0;j<(l_primo_t/2);j++){
+            mezzo_proiettile = setProiettile(j);
+        }
+        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+
+        //il secondo parametro di postDeleayed indica quanto tempo passa (in millisec) tra un'invocazione e la successiva
+
+    }
+
+    int a = 6;
+    int g = 2;
+    int b = 93;
+    int c = 100;
+    int d = 270;
+    int e = 285;
+    int f = 552;
+
+    int cont=0;
+
+    void coloraBuco () {
+        mMainHandler.postDelayed(this, 1000);
+        JSONArray tmp_anello = new JSONArray();
+        JSONObject tmp_a1 = new JSONObject();
+
+        JSONArray tmp_anello2 = new JSONArray();
+        JSONObject tmp_a2 = new JSONObject();
+
+        JSONArray tmp_anello3 = new JSONArray();
+        JSONObject tmp_a3 = new JSONObject();
+
+        cont++;
+        if(cont>19)
+        {
+            a = 6;
+            g = 2;
+            b = 93;
+            c = 100;
+            d = 270;
+            e = 285;
+            f = 552;
+
+            cont=0;
+
+        }
+
+
+//Sposto il buco
+        for (int j = 0; j < 4; j++){
+        g++;
+        ragnatela[g + led_start_anello1][0] = 255;
+        ragnatela[g + led_start_anello1][1] = 255;
+        ragnatela[g + led_start_anello1][2] = 0;
+        ragnatela[g + led_start_anello1][3] = 0;
+
+
+        a++;
+        ragnatela[a + led_start_anello1][0] = 255;
+        ragnatela[a + led_start_anello1][1] = 0;
+        ragnatela[a + led_start_anello1][2] = 0;
+        ragnatela[a + led_start_anello1][3] = 0;
+    }
+
+        try {
+            tmp_a1.put("a", ragnatela[g][0]);
+            tmp_a1.put("r", ragnatela[g][1]);
+            tmp_a1.put("g", ragnatela[g][2]);
+            tmp_a1.put("b", ragnatela[g][3]);
+
+            tmp_anello.put(tmp_a1);
+        } catch (JSONException exception) {
+            // No errors expected here
+        }
+        //}
+        //
+        for (int j = 0; j < 8; j++) {
+            b++;
+            ragnatela[b + led_start_anello1][0] = 255;
+            ragnatela[b + led_start_anello1][1] = 0;
+            ragnatela[b + led_start_anello1][2] = 255;
+            ragnatela[b + led_start_anello1][3] = 0;
+
+            c++;
+            ragnatela[c + led_start_anello1][0] = 255;
+            ragnatela[c + led_start_anello1][1] = 0;
+            ragnatela[c + led_start_anello1][2] = 0;
+            ragnatela[c + led_start_anello1][3] = 0;
+
+        }
+        try {
+            tmp_a1.put("a", ragnatela[g][0]);
+            tmp_a1.put("r", ragnatela[g][1]);
+            tmp_a1.put("g", ragnatela[g][2]);
+            tmp_a1.put("b", ragnatela[g][3]);
+
+            tmp_anello.put(tmp_a1);
+        } catch (JSONException exception) {
+            // No errors expected here
+        }
+
+        for (int j = 0; j < 12.5; j++){
+        d++;
+        ragnatela[d + led_start_anello1][0] = 255;
+        ragnatela[d + led_start_anello1][1] = 0;
+        ragnatela[d + led_start_anello1][2] = 0;
+        ragnatela[d + led_start_anello1][3] = 255;
+
+        e++;
+        ragnatela[e + led_start_anello1][0] = 255;
+        ragnatela[e + led_start_anello1][1] = 0;
+        ragnatela[e + led_start_anello1][2] = 0;
+        ragnatela[e + led_start_anello1][3] = 0;
+
+    }
+
+        try{
+                tmp_a1.put("a", ragnatela[g][0]);
+                tmp_a1.put("r", ragnatela[g][1]);
+                tmp_a1.put("g", ragnatela[g][2]);
+                tmp_a1.put("b", ragnatela[g][3]);
+
+                tmp_anello.put(tmp_a1);
+            } catch (JSONException exception) {
+                // No errors expected here
+            }
+
+
+        for(int j=0;j<(l_primo_t/2);j++){
+            mezzo_proiettile = setProiettile(j);
+        }
+        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+
+    }
 }
 
