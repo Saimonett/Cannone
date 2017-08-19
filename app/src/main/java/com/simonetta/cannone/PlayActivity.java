@@ -201,7 +201,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 int level=drawable.getLevel();
                                 if (level>0 && level<6) {
                                     drawable.setLevel(level + 1);
-                                    view.postDelayed(this, 150);
+                                    view.postDelayed(this, 70);
                                 }
                                 if (level==6){
                                     drawable.setLevel(1);
@@ -1132,12 +1132,14 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
             Intent activity_game = new Intent(PlayActivity.this, GameOver.class);
             activity_game.putExtra("messagePunti", punteggioTotale);
             startActivity(activity_game);
+            finish();
         }
 
         if (punteggioTotale<=1000) {
             Intent activity_game2 = new Intent(PlayActivity.this, GameOver2.class);
             activity_game2.putExtra("messagePunti2", punteggioTotale);
             startActivity(activity_game2);
+            finish();
         }
 
        // punteggioTotale=0;

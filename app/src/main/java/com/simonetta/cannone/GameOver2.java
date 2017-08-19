@@ -24,7 +24,7 @@ public class GameOver2 extends AppCompatActivity {
         tvPunti.setText( punteggioLivello + " points" );
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.play_again);
+        Button fab = (Button) findViewById(R.id.button_tryAgain);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

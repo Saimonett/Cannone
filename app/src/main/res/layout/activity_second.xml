@@ -7,35 +7,36 @@
     android:background="@drawable/background_second">
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <TextView
-            android:text="Cannon"
-            android:textColor="@color/White"
-            android:gravity="center"
-            android:textSize="50dp"
-            android:textStyle="bold"
-            android:layout_gravity="center"
+            android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5" />
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:text="Cannon"
+            android:textColor="@color/White"
+            android:textSize="50dp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/button_play"
-            android:text="Play"
-            android:textSize="20dp"
-            android:textColor="@color/White"
-            android:background="@drawable/background_rectangle"
-            android:layout_margin="5dp"
-            android:layout_gravity="center"
             android:layout_width="176dp"
             android:layout_height="20dp"
-            android:layout_weight="1.00" />
-<!--
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_weight="1.00"
+            android:background="@drawable/background_rectangle"
+            android:text="Play"
+            android:textColor="@color/White"
+            android:textSize="20dp" />
+        <!--
         <Button
             android:id="@+id/button_rankings"
             android:text="Rankings"
@@ -48,16 +49,16 @@
             android:layout_weight="1.00" />-->
         <Button
             android:id="@+id/button_instructions"
-            android:text="Instructiones"
-            android:textSize="20dp"
-            android:textColor="@color/White"
-            android:background="@drawable/background_rectangle"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="45dp"
-            android:layout_gravity="center"
             android:layout_width="176dp"
             android:layout_height="20dp"
-            android:layout_weight="1"/>
+            android:layout_gravity="center"
+            android:layout_marginBottom="45dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/background_rectangle"
+            android:text="Instructions"
+            android:textColor="@color/White"
+            android:textSize="20dp" />
 
 
     </LinearLayout>

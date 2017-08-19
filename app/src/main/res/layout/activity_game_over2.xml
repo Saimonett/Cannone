@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.simonetta.cannone.GameOver">
 
+    <!--
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/play_again"
         android:layout_width="wrap_content"
@@ -14,19 +15,21 @@
 
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_menu_revert" />
+    -->
 
     <include layout="@layout/content_game_over" />
 
-    <TextView
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="18dp"
-        android:layout_marginRight="84dp"
+    <Button
+        android:id="@+id/button_tryAgain"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+
+        android:layout_margin="16dp"
+        android:background="@drawable/background_rectangle"
         android:text="Try Again!"
         android:textColor="@color/White"
-        android:textSize="32dp" />
+        android:textSize="19dp" />
 
 </android.support.design.widget.CoordinatorLayout>
