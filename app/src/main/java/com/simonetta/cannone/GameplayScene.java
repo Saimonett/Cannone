@@ -105,7 +105,7 @@ public class GameplayScene extends Activity implements Scene {
             Paint paint = new Paint();
             paint.setTextSize(100);
             paint.setColor(Color.MAGENTA);
-            drawCenterText(canvas, paint, "LOSER");
+            drawCenterText(canvas, paint, "GAME OVER");
         }
     }
 

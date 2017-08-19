@@ -14,26 +14,14 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="GAME OVER!"
+            android:text="YOUR SCORE IS:"
             android:textColor="@color/White"
             android:textStyle="bold"
             android:layout_marginTop="30dp"
-            android:paddingTop="100dp"
+            android:paddingTop="90dp"
             android:textSize="44sp"
-            android:layout_weight="0.28"
-            android:layout_gravity="center"
-            />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Score:"
-            android:textColor="@color/White"
-            android:textSize="33sp"
-            android:padding="0dp"
-            android:layout_margin="0dp"
-            android:layout_gravity="center"/>
+            android:layout_weight="0.1"
+            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/punteggioTot"
@@ -43,5 +31,6 @@
             android:textColor="@color/White"
             android:layout_weight="0.16"
             android:layout_gravity="center"/>
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

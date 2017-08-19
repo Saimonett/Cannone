@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+
 public class GameOver extends AppCompatActivity {
 
     @Override
@@ -20,28 +21,18 @@ public class GameOver extends AppCompatActivity {
         int punteggioLivello = datiPassati.getIntExtra("messagePunti",0);
 
         TextView tvPunti = (TextView) findViewById(R.id.punteggioTot);
-        tvPunti.setText( punteggioLivello + "punti" );
+        tvPunti.setText( punteggioLivello + " points" );
 
+            Button button_saveSpider = (Button) findViewById(R.id.button_saveSpider);
+            button_saveSpider.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent activity = new Intent(GameOver.this, MainActivity2.class);
+                    startActivity(activity);
+                    finish();
+                }
+            });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.play_again);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent activity_second = new Intent(GameOver.this, PlayActivity.class);
-                startActivity(activity_second);
-                finish();
-            }
-        });
-
-        Button button_saveSpider = (Button) findViewById(R.id.button_saveSpider);
-        button_saveSpider.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent activity = new Intent(GameOver.this, MainActivity2.class);
-                startActivity(activity);
-                finish();
-            }
-        });
     }
 
 }
