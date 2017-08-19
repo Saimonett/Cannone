@@ -97,6 +97,16 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     private boolean running=false;
 
 
+    public boolean ramo1shooted=false;
+    public boolean ramo2shooted=false;
+    public boolean ramo3shooted=false;
+    public boolean ramo4shooted=false;
+    public boolean ramo5shooted=false;
+
+
+
+
+
     @Override
     public boolean onTouch(final View v, MotionEvent event) {
         //trova il baricentro
@@ -124,38 +134,48 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
 
                 mCurrAngle = Math.toDegrees(Math.atan2( y - yc, x-xc));
 
-                if (mCurrAngle >=-125 && mCurrAngle<-55){
+                //RAMO VERTICALE IN ALTO
+                if (mCurrAngle >=-125 && mCurrAngle<-55 && ramo1shooted==false){
                     mCurrAngle=-90;
                     animate(mPrevAngle, mCurrAngle, 0);
                     pos_cannone = 1;
                     setDisplayPixels();
                 }
-
-                else if ((mCurrAngle>167 && mCurrAngle<180)||(mCurrAngle<-125 && mCurrAngle>-180)){
+                //RAMO IN ALTO A SINISTRA
+                else if ((mCurrAngle>167 && mCurrAngle<180 && ramo2shooted==false)||(mCurrAngle<-125 && mCurrAngle>-180 && ramo2shooted==false)){
                     mCurrAngle=-156;
                     animate(mPrevAngle, mCurrAngle, 0);
                     pos_cannone = 2;
                     setDisplayPixels5();
                 }
 
-                else if (mCurrAngle <167 && mCurrAngle>=90){
+                //RAMO IN BASSO A SINISTRA
+                else if (mCurrAngle <167 && mCurrAngle>=90 && ramo3shooted==false){
                     mCurrAngle=138;
                     animate(mPrevAngle, mCurrAngle, 0);
                     pos_cannone = 3;
                     setDisplayPixels3();
                 }
 
-                else if (mCurrAngle <90 && mCurrAngle>=10){
+                //RAMO IN BASSO A DESTRA
+                else if (mCurrAngle <90 && mCurrAngle>=10 && ramo4shooted==false){
                     mCurrAngle=43;
                     animate(mPrevAngle, mCurrAngle, 0);
                     pos_cannone = 4;
                     setDisplayPixels4();
                 }
-                else{
+
+                //RAMO IN ALTO A DESTRA
+                //così non rispetta più le posizioni forzate giustamente quindi arrivati ad aver sparato su tutti i tiranti bisogna lanciare il gameover!!!!
+                else if (ramo5shooted==false){
                     mCurrAngle=336;
                     animate(mPrevAngle, mCurrAngle, 0);
                     pos_cannone = 5;
                     setDisplayPixels2();
+                }
+                //????????????????????????????????
+                else{
+                    // gameOver();
                 }
                 break;
             }
@@ -176,6 +196,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
             @Override
             public boolean onTouch(final View view, MotionEvent motionEvent) {
                 switch (motionEvent.getAction()) {
+
                     case MotionEvent.ACTION_DOWN:
                         drawable.setLevel(1);
                         view.postDelayed(new Runnable() {
@@ -183,16 +204,295 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 int level=drawable.getLevel();
                                 if (level>0 && level<6) {
                                     drawable.setLevel(level + 1);
-                                    view.postDelayed(this, 200);
+                                    view.postDelayed(this, 150);
+                                }
+                                if (level==6){
+                                    drawable.setLevel(1);
+                                    run();
                                 }
                             }
                         }, 100);
                         break;
+
                     case MotionEvent.ACTION_UP:
 
-
                         int level=drawable.getLevel();
-                        if (level>4) {
+
+
+//  ------------------- START CASE LEVEL 1 -----------------------------------------------
+
+                        if (level<=1) {
+                            //qui bisogna sparare
+                            Log.d("Sparo","Forza :"+level);
+
+                            if(pos_cannone==1)   {
+                                try {
+
+                                    for(int j=0;j<(l_primo_t/15);j++){
+                                        mezzo_proiettile = setProiettile(j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            else if(pos_cannone==2)   {
+                                try {
+                                    int led_start_2 = l_primo_t + l_quinto_t + l_quarto_t + l_terzo_t;
+                                    for(int j=0;j<(l_secondo_t/15);j++){
+                                        mezzo_proiettile = setProiettile2(led_start_2, j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            if(pos_cannone==3)   {
+                                try {
+                                    int led_start_3 = l_primo_t + l_quinto_t + l_quarto_t;
+                                    for(int j=0;j<(l_terzo_t/15);j++){
+                                        mezzo_proiettile = setProiettile3(led_start_3, j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            if(pos_cannone==4)   {
+                                try {
+                                    int led_start_4 = l_primo_t + l_quinto_t;
+                                    for(int j=0;j<(l_quarto_t/15);j++){
+                                        mezzo_proiettile = setProiettile4(led_start_4, j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            if(pos_cannone==5)   {
+                                try {
+                                    for(int j=0;j<(l_quinto_t/15);j++){
+                                        mezzo_proiettile = setProiettile5(l_primo_t,j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+//  ------------------- FINISH CASE LEVEL 1 -----------------------------------------------
+
+
+//  ------------------- START CASE LEVEL 2 -----------------------------------------------
+
+                        if (level==2) {
+                            //qui bisogna sparare
+                            Log.d("Sparo","Forza :"+level);
+
+                            if(pos_cannone==1)   {
+                                try {
+
+                                    for(int j=0;j<(l_primo_t/8);j++){
+                                        mezzo_proiettile = setProiettile(j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            else if(pos_cannone==2)   {
+                                try {
+                                    int led_start_2 = l_primo_t + l_quinto_t + l_quarto_t + l_terzo_t;
+                                    for(int j=0;j<(l_secondo_t/8);j++){
+                                        mezzo_proiettile = setProiettile2(led_start_2, j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            if(pos_cannone==3)   {
+                                try {
+                                    int led_start_3 = l_primo_t + l_quinto_t + l_quarto_t;
+                                    for(int j=0;j<(l_terzo_t/8);j++){
+                                        mezzo_proiettile = setProiettile3(led_start_3, j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            if(pos_cannone==4)   {
+                                try {
+                                    int led_start_4 = l_primo_t + l_quinto_t;
+                                    for(int j=0;j<(l_quarto_t/8);j++){
+                                        mezzo_proiettile = setProiettile4(led_start_4, j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            if(pos_cannone==5)   {
+                                try {
+                                    for(int j=0;j<(l_quinto_t/8);j++){
+                                        mezzo_proiettile = setProiettile5(l_primo_t,j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+//  ------------------- FINISH CASE LEVEL 2 -----------------------------------------------
+
+
+
+//  ------------------- START CASE LEVEL 2 -----------------------------------------------
+
+                        if (level>2 && level<=3) {
+                            //qui bisogna sparare
+                            Log.d("Sparo","Forza :"+level);
+
+                            if(pos_cannone==1)   {
+                                try {
+
+                                    for(int j=0;j<(l_primo_t/4);j++){
+                                        mezzo_proiettile = setProiettile(j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            else if(pos_cannone==2)   {
+                                try {
+                                    int led_start_2 = l_primo_t + l_quinto_t + l_quarto_t + l_terzo_t;
+                                    for(int j=0;j<(l_secondo_t/4);j++){
+                                        mezzo_proiettile = setProiettile2(led_start_2, j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            if(pos_cannone==3)   {
+                                try {
+                                    int led_start_3 = l_primo_t + l_quinto_t + l_quarto_t;
+                                    for(int j=0;j<(l_terzo_t/4);j++){
+                                        mezzo_proiettile = setProiettile3(led_start_3, j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            if(pos_cannone==4)   {
+                                try {
+                                    int led_start_4 = l_primo_t + l_quinto_t;
+                                    for(int j=0;j<(l_quarto_t/4);j++){
+                                        mezzo_proiettile = setProiettile4(led_start_4, j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            if(pos_cannone==5)   {
+                                try {
+                                    for(int j=0;j<(l_quinto_t/4);j++){
+                                        mezzo_proiettile = setProiettile5(l_primo_t,j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+//  ------------------- FINISH CASE LEVEL 2 -----------------------------------------------
+
+
+
+
+
+//  ------------------- START CASE LEVEL 3 -----------------------------------------------
+
+                        if (level>3 && level<=4) {
+                            //qui bisogna sparare
+                            Log.d("Sparo","Forza :"+level);
+
+                            if(pos_cannone==1)   {
+                                try {
+
+                                    for(int j=0;j<(l_primo_t/3);j++){
+                                        mezzo_proiettile = setProiettile(j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            else if(pos_cannone==2)   {
+                                try {
+                                    int led_start_2 = l_primo_t + l_quinto_t + l_quarto_t + l_terzo_t;
+                                    for(int j=0;j<(l_secondo_t/3);j++){
+                                        mezzo_proiettile = setProiettile2(led_start_2, j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            if(pos_cannone==3)   {
+                                try {
+                                    int led_start_3 = l_primo_t + l_quinto_t + l_quarto_t;
+                                    for(int j=0;j<(l_terzo_t/3);j++){
+                                        mezzo_proiettile = setProiettile3(led_start_3, j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            if(pos_cannone==4)   {
+                                try {
+                                    int led_start_4 = l_primo_t + l_quinto_t;
+                                    for(int j=0;j<(l_quarto_t/3);j++){
+                                        mezzo_proiettile = setProiettile4(led_start_4, j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            if(pos_cannone==5)   {
+                                try {
+                                    for(int j=0;j<(l_quinto_t/3);j++){
+                                        mezzo_proiettile = setProiettile5(l_primo_t,j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+//  ------------------- FINISH CASE LEVEL 3 -----------------------------------------------
+
+
+
+
+
+//  ------------------- START CASE LEVEL 4 -----------------------------------------------
+
+                        else if (level>=5) {
                             //qui bisogna sparare
                             Log.d("Sparo","Forza :"+level);
 
@@ -211,8 +511,8 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 try {
                                     int led_start_2 = l_primo_t + l_quinto_t + l_quarto_t + l_terzo_t;
                                     for(int j=0;j<(l_secondo_t/2);j++){
-                                        mezzo_proiettile_2 = setProiettile2(led_start_2, j);
-                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile_2, 0, 0);
+                                        mezzo_proiettile = setProiettile2(led_start_2, j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
                                     }
                                 } catch (Exception e) {
                                     e.printStackTrace();
@@ -223,8 +523,8 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 try {
                                     int led_start_3 = l_primo_t + l_quinto_t + l_quarto_t;
                                     for(int j=0;j<(l_terzo_t/2);j++){
-                                        mezzo_proiettile_3 = setProiettile3(led_start_3, j);
-                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile_3, 0, 0);
+                                        mezzo_proiettile = setProiettile3(led_start_3, j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
                                     }
                                 } catch (Exception e) {
                                     e.printStackTrace();
@@ -234,8 +534,8 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 try {
                                     int led_start_4 = l_primo_t + l_quinto_t;
                                     for(int j=0;j<(l_quarto_t/2);j++){
-                                        mezzo_proiettile_4 = setProiettile4(led_start_4, j);
-                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile_4, 0, 0);
+                                        mezzo_proiettile = setProiettile4(led_start_4, j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
                                     }
                                 } catch (Exception e) {
                                     e.printStackTrace();
@@ -244,16 +544,22 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                             if(pos_cannone==5)   {
                                 try {
                                     for(int j=0;j<(l_quinto_t/2);j++){
-                                        mezzo_proiettile_5 = setProiettile5(l_primo_t,j);
-                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile_5, 0, 0);
+                                        mezzo_proiettile = setProiettile5(l_primo_t,j);
+                                        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
                                     }
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                             }
                         }
+
+//  ------------------- FINISH CASE LEVEL 4 -----------------------------------------------
+
+
+
                         drawable.setLevel(0);
                         break;
+
                     case MotionEvent.ACTION_MOVE:
                         if (motionEvent.getX()<0 || motionEvent.getX()>=view.getWidth() ||
                                 motionEvent.getY()<0 || motionEvent.getY()>=view.getHeight())
@@ -292,10 +598,10 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
 
     public void run() {
         Log.d("Sparo","GIOVANNI");
-        coloraAnelli();
+       // coloraAnelli();
 
        // mMainHandler.postDelayed(this,5000);
-        coloraBuco ();
+        //  coloraBuco ();
 
     }
 
@@ -742,7 +1048,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     void setDisplayPixels(){
         try{
             JSONArray pixels_array = new JSONArray();
-            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannone_pos1);
+            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannon);
             tempBMP=Bitmap.createScaledBitmap(tempBMP,32,32,false);
             int[]pixels = new int [tempBMP.getHeight()*tempBMP.getWidth()];
             tempBMP.getPixels(pixels, 0, tempBMP.getWidth(), 0, 0, tempBMP.getWidth(), tempBMP.getHeight());
@@ -770,7 +1076,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     void setDisplayPixels2(){
         try{
             JSONArray pixels_array = new JSONArray();
-            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannone_pos2);
+            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannon);
             tempBMP=Bitmap.createScaledBitmap(tempBMP,32,32,false);
             int[]pixels = new int [tempBMP.getHeight()*tempBMP.getWidth()];
             tempBMP.getPixels(pixels, 0, tempBMP.getWidth(), 0, 0, tempBMP.getWidth(), tempBMP.getHeight());
@@ -798,7 +1104,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     void setDisplayPixels3(){
         try{
             JSONArray pixels_array = new JSONArray();
-            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannone_pos3);
+            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannon);
             tempBMP=Bitmap.createScaledBitmap(tempBMP,32,32,false);
             int[]pixels = new int [tempBMP.getHeight()*tempBMP.getWidth()];
             tempBMP.getPixels(pixels, 0, tempBMP.getWidth(), 0, 0, tempBMP.getWidth(), tempBMP.getHeight());
@@ -826,7 +1132,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     void setDisplayPixels4(){
         try{
             JSONArray pixels_array = new JSONArray();
-            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannone_pos4);
+            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannon);
             tempBMP=Bitmap.createScaledBitmap(tempBMP,32,32,false);
             int[]pixels = new int [tempBMP.getHeight()*tempBMP.getWidth()];
             tempBMP.getPixels(pixels, 0, tempBMP.getWidth(), 0, 0, tempBMP.getWidth(), tempBMP.getHeight());
@@ -854,7 +1160,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     void setDisplayPixels5(){
         try{
             JSONArray pixels_array = new JSONArray();
-            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannone_pos5);
+            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannon);
             tempBMP=Bitmap.createScaledBitmap(tempBMP,32,32,false);
             int[]pixels = new int [tempBMP.getHeight()*tempBMP.getWidth()];
             tempBMP.getPixels(pixels, 0, tempBMP.getWidth(), 0, 0, tempBMP.getWidth(), tempBMP.getHeight());
@@ -880,6 +1186,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         }
     }
 
+    /*
     void coloraAnelli(){
 
         JSONArray tmp_anello = new JSONArray();
@@ -942,7 +1249,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     int cont=0;
 
     void coloraBuco () {
-        mMainHandler.postDelayed(this, 1000);
+        mMainHandler.postDelayed(this, 500);
         JSONArray tmp_anello = new JSONArray();
         JSONObject tmp_a1 = new JSONObject();
 
@@ -1054,5 +1361,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
 
     }
+*/
+
 }
 
