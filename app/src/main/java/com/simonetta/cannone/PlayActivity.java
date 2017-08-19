@@ -134,38 +134,48 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
 
                 mCurrAngle = Math.toDegrees(Math.atan2( y - yc, x-xc));
 
-                if (mCurrAngle >=-125 && mCurrAngle<-55){
+                //RAMO VERTICALE IN ALTO
+                if (mCurrAngle >=-125 && mCurrAngle<-55 && ramo1shooted==false){
                     mCurrAngle=-90;
                     animate(mPrevAngle, mCurrAngle, 0);
                     pos_cannone = 1;
                     setDisplayPixels();
                 }
-
-                else if ((mCurrAngle>167 && mCurrAngle<180)||(mCurrAngle<-125 && mCurrAngle>-180)){
+                //RAMO IN ALTO A SINISTRA
+                else if ((mCurrAngle>167 && mCurrAngle<180 && ramo2shooted==false)||(mCurrAngle<-125 && mCurrAngle>-180 && ramo2shooted==false)){
                     mCurrAngle=-156;
                     animate(mPrevAngle, mCurrAngle, 0);
                     pos_cannone = 2;
                     setDisplayPixels5();
                 }
 
-                else if (mCurrAngle <167 && mCurrAngle>=90){
+                //RAMO IN BASSO A SINISTRA
+                else if (mCurrAngle <167 && mCurrAngle>=90 && ramo3shooted==false){
                     mCurrAngle=138;
                     animate(mPrevAngle, mCurrAngle, 0);
                     pos_cannone = 3;
                     setDisplayPixels3();
                 }
 
-                else if (mCurrAngle <90 && mCurrAngle>=10){
+                //RAMO IN BASSO A DESTRA
+                else if (mCurrAngle <90 && mCurrAngle>=10 && ramo4shooted==false){
                     mCurrAngle=43;
                     animate(mPrevAngle, mCurrAngle, 0);
                     pos_cannone = 4;
                     setDisplayPixels4();
                 }
-                else{
+
+                //RAMO IN ALTO A DESTRA
+                //così non rispetta più le posizioni forzate giustamente quindi arrivati ad aver sparato su tutti i tiranti bisogna lanciare il gameover!!!!
+                else if (ramo5shooted==false){
                     mCurrAngle=336;
                     animate(mPrevAngle, mCurrAngle, 0);
                     pos_cannone = 5;
                     setDisplayPixels2();
+                }
+                //????????????????????????????????
+                else{
+                    // gameOver();
                 }
                 break;
             }
