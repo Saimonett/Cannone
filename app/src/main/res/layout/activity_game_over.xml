@@ -6,15 +6,27 @@
     android:layout_height="match_parent"
     tools:context="com.simonetta.cannone.GameOver">
 
-    <include layout="@layout/content_game_over" />
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/play_again"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_gravity="bottom|start"
 
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_menu_revert" />
+
+    <Button
+        android:id="@+id/button_saveSpider"
+        android:layout_width="167dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+
+        android:layout_margin="16dp"
+        android:background="@drawable/background_rectangle"
+        android:text="Save the Spider"
+        android:textColor="@color/White"
+        android:textSize="19dp" />
+
+    <include layout="@layout/content_game_over" />
 
 </android.support.design.widget.CoordinatorLayout>

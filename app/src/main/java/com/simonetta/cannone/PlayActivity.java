@@ -97,15 +97,11 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     private boolean running=false;
 
 
-    public boolean ramo1shooted=false;
-    public boolean ramo2shooted=false;
-    public boolean ramo3shooted=false;
-    public boolean ramo4shooted=false;
-    public boolean ramo5shooted=false;
-
-
-
-
+    public boolean ramo1shooted = false;
+    public boolean ramo2shooted = false;
+    public boolean ramo3shooted = false;
+    public boolean ramo4shooted = false;
+    public boolean ramo5shooted = false;
 
     @Override
     public boolean onTouch(final View v, MotionEvent event) {
@@ -192,6 +188,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         wheel.setOnTouchListener(this);
         drawable=(LevelListDrawable)bShoot.getBackground();
         drawable.setLevel(0);
+
         bShoot.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(final View view, MotionEvent motionEvent) {
@@ -225,7 +222,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                             //qui bisogna sparare
                             Log.d("Sparo","Forza :"+level);
 
-                            if(pos_cannone==1)   {
+                            if(pos_cannone==1 && ramo1shooted!=true)   {
                                 try {
 
                                     for(int j=0;j<(l_primo_t/15);j++){
@@ -235,8 +232,10 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio1=50;
+                                ramo1shooted=true;
                             }
-                            else if(pos_cannone==2)   {
+                            else if(pos_cannone==2 && ramo2shooted!=true)   {
                                 try {
                                     int led_start_2 = l_primo_t + l_quinto_t + l_quarto_t + l_terzo_t;
                                     for(int j=0;j<(l_secondo_t/15);j++){
@@ -246,9 +245,11 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio2=50;
+                                ramo2shooted=true;
                             }
 
-                            if(pos_cannone==3)   {
+                            if(pos_cannone==3 && ramo3shooted!=true)   {
                                 try {
                                     int led_start_3 = l_primo_t + l_quinto_t + l_quarto_t;
                                     for(int j=0;j<(l_terzo_t/15);j++){
@@ -258,8 +259,10 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio1=50;
+                                ramo3shooted=true;
                             }
-                            if(pos_cannone==4)   {
+                            if(pos_cannone==4 && ramo4shooted!=true)   {
                                 try {
                                     int led_start_4 = l_primo_t + l_quinto_t;
                                     for(int j=0;j<(l_quarto_t/15);j++){
@@ -269,8 +272,10 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio4=50;
+                                ramo4shooted=true;
                             }
-                            if(pos_cannone==5)   {
+                            if(pos_cannone==5 && ramo5shooted!=true)   {
                                 try {
                                     for(int j=0;j<(l_quinto_t/15);j++){
                                         mezzo_proiettile = setProiettile5(l_primo_t,j);
@@ -279,6 +284,11 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio5=50;
+                                ramo5shooted=true;
+                            }
+                            if(ramo1shooted==true && ramo2shooted==true && ramo3shooted==true && ramo4shooted==true && ramo5shooted==true){
+                                gameOver();
                             }
                         }
 
@@ -291,7 +301,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                             //qui bisogna sparare
                             Log.d("Sparo","Forza :"+level);
 
-                            if(pos_cannone==1)   {
+                            if(pos_cannone==1 && ramo1shooted!=true)   {
                                 try {
 
                                     for(int j=0;j<(l_primo_t/8);j++){
@@ -301,8 +311,10 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio1=100;
+                                ramo1shooted=true;
                             }
-                            else if(pos_cannone==2)   {
+                            else if(pos_cannone==2 && ramo2shooted!=true)   {
                                 try {
                                     int led_start_2 = l_primo_t + l_quinto_t + l_quarto_t + l_terzo_t;
                                     for(int j=0;j<(l_secondo_t/8);j++){
@@ -312,9 +324,11 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio2=100;
+                                ramo2shooted=true;
                             }
 
-                            if(pos_cannone==3)   {
+                            if(pos_cannone==3 && ramo3shooted!=true)   {
                                 try {
                                     int led_start_3 = l_primo_t + l_quinto_t + l_quarto_t;
                                     for(int j=0;j<(l_terzo_t/8);j++){
@@ -324,8 +338,10 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio3=100;
+                                ramo3shooted=true;
                             }
-                            if(pos_cannone==4)   {
+                            if(pos_cannone==4 && ramo4shooted!=true)   {
                                 try {
                                     int led_start_4 = l_primo_t + l_quinto_t;
                                     for(int j=0;j<(l_quarto_t/8);j++){
@@ -335,8 +351,10 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio4=100;
+                                ramo4shooted=true;
                             }
-                            if(pos_cannone==5)   {
+                            if(pos_cannone==5 && ramo5shooted!=true)   {
                                 try {
                                     for(int j=0;j<(l_quinto_t/8);j++){
                                         mezzo_proiettile = setProiettile5(l_primo_t,j);
@@ -345,6 +363,11 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio5=100;
+                                ramo5shooted=true;
+                            }
+                            if(ramo1shooted==true && ramo2shooted==true && ramo3shooted==true && ramo4shooted==true && ramo5shooted==true){
+                                gameOver();
                             }
                         }
 
@@ -358,7 +381,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                             //qui bisogna sparare
                             Log.d("Sparo","Forza :"+level);
 
-                            if(pos_cannone==1)   {
+                            if(pos_cannone==1 && ramo1shooted!=true)   {
                                 try {
 
                                     for(int j=0;j<(l_primo_t/4);j++){
@@ -368,8 +391,10 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio1=150;
+                                ramo1shooted=true;
                             }
-                            else if(pos_cannone==2)   {
+                            else if(pos_cannone==2 && ramo2shooted!=true)   {
                                 try {
                                     int led_start_2 = l_primo_t + l_quinto_t + l_quarto_t + l_terzo_t;
                                     for(int j=0;j<(l_secondo_t/4);j++){
@@ -379,9 +404,11 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio2=150;
+                                ramo2shooted=true;
                             }
 
-                            if(pos_cannone==3)   {
+                            if(pos_cannone==3 && ramo3shooted!=true)   {
                                 try {
                                     int led_start_3 = l_primo_t + l_quinto_t + l_quarto_t;
                                     for(int j=0;j<(l_terzo_t/4);j++){
@@ -391,8 +418,10 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio3=150;
+                                ramo3shooted=true;
                             }
-                            if(pos_cannone==4)   {
+                            if(pos_cannone==4 && ramo4shooted!=true)   {
                                 try {
                                     int led_start_4 = l_primo_t + l_quinto_t;
                                     for(int j=0;j<(l_quarto_t/4);j++){
@@ -402,8 +431,10 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio4=150;
+                                ramo4shooted=true;
                             }
-                            if(pos_cannone==5)   {
+                            if(pos_cannone==5 && ramo5shooted!=true)   {
                                 try {
                                     for(int j=0;j<(l_quinto_t/4);j++){
                                         mezzo_proiettile = setProiettile5(l_primo_t,j);
@@ -412,6 +443,11 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio5=150;
+                                ramo5shooted=true;
+                            }
+                            if(ramo1shooted==true && ramo2shooted==true && ramo3shooted==true && ramo4shooted==true && ramo5shooted==true){
+                                gameOver();
                             }
                         }
 
@@ -427,7 +463,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                             //qui bisogna sparare
                             Log.d("Sparo","Forza :"+level);
 
-                            if(pos_cannone==1)   {
+                            if(pos_cannone==1 && ramo1shooted!=true)   {
                                 try {
 
                                     for(int j=0;j<(l_primo_t/3);j++){
@@ -437,8 +473,10 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio1=200;
+                                ramo1shooted=true;
                             }
-                            else if(pos_cannone==2)   {
+                            else if(pos_cannone==2 && ramo2shooted!=true)   {
                                 try {
                                     int led_start_2 = l_primo_t + l_quinto_t + l_quarto_t + l_terzo_t;
                                     for(int j=0;j<(l_secondo_t/3);j++){
@@ -448,9 +486,11 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio2=200;
+                                ramo2shooted=true;
                             }
 
-                            if(pos_cannone==3)   {
+                            if(pos_cannone==3 && ramo3shooted!=true)   {
                                 try {
                                     int led_start_3 = l_primo_t + l_quinto_t + l_quarto_t;
                                     for(int j=0;j<(l_terzo_t/3);j++){
@@ -460,8 +500,10 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio3=200;
+                                ramo3shooted=true;
                             }
-                            if(pos_cannone==4)   {
+                            if(pos_cannone==4 && ramo4shooted!=true)   {
                                 try {
                                     int led_start_4 = l_primo_t + l_quinto_t;
                                     for(int j=0;j<(l_quarto_t/3);j++){
@@ -471,8 +513,10 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio4=200;
+                                ramo4shooted=true;
                             }
-                            if(pos_cannone==5)   {
+                            if(pos_cannone==5 && ramo5shooted!=true)   {
                                 try {
                                     for(int j=0;j<(l_quinto_t/3);j++){
                                         mezzo_proiettile = setProiettile5(l_primo_t,j);
@@ -481,6 +525,11 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio5=200;
+                                ramo5shooted=true;
+                            }
+                            if(ramo1shooted==true && ramo2shooted==true && ramo3shooted==true && ramo4shooted==true && ramo5shooted==true){
+                                gameOver();
                             }
                         }
 
@@ -492,11 +541,11 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
 
 //  ------------------- START CASE LEVEL 4 -----------------------------------------------
 
-                        else if (level>=5) {
+                        else if (level>4) {
                             //qui bisogna sparare
                             Log.d("Sparo","Forza :"+level);
 
-                            if(pos_cannone==1)   {
+                            if(pos_cannone==1 && ramo1shooted!=true)   {
                                 try {
 
                                     for(int j=0;j<(l_primo_t/2);j++){
@@ -506,8 +555,10 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio1=400;
+                                ramo1shooted=true;
                             }
-                            else if(pos_cannone==2)   {
+                            else if(pos_cannone==2 && ramo2shooted!=true)   {
                                 try {
                                     int led_start_2 = l_primo_t + l_quinto_t + l_quarto_t + l_terzo_t;
                                     for(int j=0;j<(l_secondo_t/2);j++){
@@ -517,9 +568,11 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio2=400;
+                                ramo2shooted=true;
                             }
 
-                            if(pos_cannone==3)   {
+                            if(pos_cannone==3 && ramo3shooted!=true)   {
                                 try {
                                     int led_start_3 = l_primo_t + l_quinto_t + l_quarto_t;
                                     for(int j=0;j<(l_terzo_t/2);j++){
@@ -529,8 +582,10 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio3=400;
+                                ramo3shooted=true;
                             }
-                            if(pos_cannone==4)   {
+                            if(pos_cannone==4 && ramo4shooted!=true)   {
                                 try {
                                     int led_start_4 = l_primo_t + l_quinto_t;
                                     for(int j=0;j<(l_quarto_t/2);j++){
@@ -540,8 +595,10 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio4=400;
+                                ramo4shooted=true;
                             }
-                            if(pos_cannone==5)   {
+                            if(pos_cannone==5 && ramo5shooted!=true)   {
                                 try {
                                     for(int j=0;j<(l_quinto_t/2);j++){
                                         mezzo_proiettile = setProiettile5(l_primo_t,j);
@@ -550,6 +607,11 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
+                                punteggio5=400;
+                                ramo5shooted=true;
+                            }
+                            if(ramo1shooted==true && ramo2shooted==true && ramo3shooted==true && ramo4shooted==true && ramo5shooted==true){
+                                gameOver();
                             }
                         }
 
@@ -567,8 +629,12 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                         break;
                 }
                 return true;
+
+
+
             }
-        });
+        }
+        );
         mMainHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -651,11 +717,11 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
             }
         }
 */
-        ragnatela[j][0]=0;// coloriamo i primi 3 led verdi
+       /* ragnatela[j][0]=0;// coloriamo i primi 3 led verdi
         ragnatela[j][1]=0;
         ragnatela[j][2]=0;
         ragnatela[j][3]=0;
-
+*/
         ragnatela[j+1][0]=100;// coloriamo i primi 3 led verdi
         ragnatela[j+1][1]=0;
         ragnatela[j+1][2]=255;
@@ -667,12 +733,12 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         ragnatela[j+2][3]=0;
 
         // anche gli ultimi si accendono
-
+/*
         ragnatela[l_primo_t-j-1][0]=0;// coloriamo i primi 3 led verdi
         ragnatela[l_primo_t-j-1][1]=0;
         ragnatela[l_primo_t-j-1][2]=0;
         ragnatela[l_primo_t-j-1][3]=0;
-
+*/
         ragnatela[l_primo_t-j-2][0]=100;// coloriamo i primi 3 led verdi
         ragnatela[l_primo_t-j-2][1]=0;
         ragnatela[l_primo_t-j-2][2]=255;
@@ -729,11 +795,12 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
             }
         }
 */
+/*
         ragnatela[j+count][0]=0;// coloriamo i primi 3 led verdi
         ragnatela[j+count][1]=0;
         ragnatela[j+count][2]=0;
         ragnatela[j+count][3]=0;
-
+*/
         ragnatela[j+count+1][0]=100;// coloriamo i primi 3 led verdi
         ragnatela[j+count+1][1]=0;
         ragnatela[j+count+1][2]=255;
@@ -745,12 +812,12 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         ragnatela[j+count+2][3]=0;
 
         // anche gli ultimi si accendono
-
+/*
         ragnatela[j+l_secondo_t-count+2][0]=0;// coloriamo i primi 3 led verdi
         ragnatela[j+l_secondo_t-count+2][1]=0;
         ragnatela[j+l_secondo_t-count+2][2]=0;
         ragnatela[j+l_secondo_t-count+2][3]=0;
-
+*/
         ragnatela[j+l_secondo_t-count+1][0]=100;// coloriamo i primi 3 led verdi
         ragnatela[j+l_secondo_t-count+1][1]=0;
         ragnatela[j+l_secondo_t-count+1][2]=255;
@@ -806,12 +873,12 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                 Log.d("Tick","tick");
             }
         }
-*/
+*//*
         ragnatela[j+count][0]=0;// coloriamo i primi 3 led verdi
         ragnatela[j+count][1]=0;
         ragnatela[j+count][2]=0;
         ragnatela[j+count][3]=0;
-
+*/
         ragnatela[j+count+1][0]=100;// coloriamo i primi 3 led verdi
         ragnatela[j+count+1][1]=0;
         ragnatela[j+count+1][2]=255;
@@ -823,12 +890,12 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         ragnatela[j+count+2][3]=0;
 
         // anche gli ultimi si accendono
-
+/*
         ragnatela[j+l_terzo_t-count+1][0]=0;// coloriamo i primi 3 led verdi
         ragnatela[j+l_terzo_t-count+1][1]=0;
         ragnatela[j+l_terzo_t-count+1][2]=0;
         ragnatela[j+l_terzo_t-count+1][3]=0;
-
+*/
         ragnatela[j+l_terzo_t-count][0]=100;// coloriamo i primi 3 led verdi
         ragnatela[j+l_terzo_t-count][1]=0;
         ragnatela[j+l_terzo_t-count][2]=255;
@@ -885,11 +952,12 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
             }
         }
 */
+/*
         ragnatela[j+count][0]=0;// coloriamo i primi 3 led verdi
         ragnatela[j+count][1]=0;
         ragnatela[j+count][2]=0;
         ragnatela[j+count][3]=0;
-
+*/
         ragnatela[j+count+1][0]=100;// coloriamo i primi 3 led verdi
         ragnatela[j+count+1][1]=0;
         ragnatela[j+count+1][2]=255;
@@ -901,12 +969,12 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         ragnatela[j+count+2][3]=0;
 
         // anche gli ultimi si accendono
-
+/*
         ragnatela[j+l_quarto_t-count+1][0]=0;// coloriamo i primi 3 led verdi
         ragnatela[j+l_quarto_t-count+1][1]=0;
         ragnatela[j+l_quarto_t-count+1][2]=0;
         ragnatela[j+l_quarto_t-count+1][3]=0;
-
+*/
         ragnatela[j+l_quarto_t-count][0]=100;// coloriamo i primi 3 led verdi
         ragnatela[j+l_quarto_t-count][1]=0;
         ragnatela[j+l_quarto_t-count][2]=255;
@@ -965,12 +1033,12 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         }
 */
 
-
+/*
         ragnatela[j+count][0]=0;// coloriamo i primi 3 led verdi
         ragnatela[j+count][1]=0;
         ragnatela[j+count][2]=0;
         ragnatela[j+count][3]=0;
-
+*/
         ragnatela[j+count+1][0]=100;// coloriamo i primi 3 led verdi
         ragnatela[j+count+1][1]=0;
         ragnatela[j+count+1][2]=255;
@@ -982,12 +1050,12 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         ragnatela[j+count+2][3]=0;
 
         // anche gli ultimi si accendono
-
+/*
         ragnatela[j+l_quinto_t-count+1][0]=0;// coloriamo i primi 3 led verdi
         ragnatela[j+l_quinto_t-count+1][1]=0;
         ragnatela[j+l_quinto_t-count+1][2]=0;
         ragnatela[j+l_quinto_t-count+1][3]=0;
-
+*/
         ragnatela[j+l_quinto_t-count][0]=100;// coloriamo i primi 3 led verdi
         ragnatela[j+l_quinto_t-count][1]=0;
         ragnatela[j+l_quinto_t-count][2]=255;
@@ -1032,15 +1100,15 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
         System.out.println(mCurrAngle);
     }
 
-    private void gameOver(int j){
-        Log.d("TickGameOver","tickGameOver");
+    private void gameOver(){
+       // Log.d("TickGameOver","tickGameOver");
         punteggioTotale=punteggio1+punteggio2+punteggio3+punteggio4+punteggio5;
 
         Intent activity_game = new Intent(PlayActivity.this, GameOver.class);
         activity_game.putExtra("messagePunti", punteggioTotale);
         startActivity(activity_game);
 
-        punteggioTotale=0;
+       // punteggioTotale=0;
 
 
     }
@@ -1048,7 +1116,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     void setDisplayPixels(){
         try{
             JSONArray pixels_array = new JSONArray();
-            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannon);
+            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannone_pos1);
             tempBMP=Bitmap.createScaledBitmap(tempBMP,32,32,false);
             int[]pixels = new int [tempBMP.getHeight()*tempBMP.getWidth()];
             tempBMP.getPixels(pixels, 0, tempBMP.getWidth(), 0, 0, tempBMP.getWidth(), tempBMP.getHeight());
@@ -1076,7 +1144,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     void setDisplayPixels2(){
         try{
             JSONArray pixels_array = new JSONArray();
-            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannon);
+            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannone_pos2);
             tempBMP=Bitmap.createScaledBitmap(tempBMP,32,32,false);
             int[]pixels = new int [tempBMP.getHeight()*tempBMP.getWidth()];
             tempBMP.getPixels(pixels, 0, tempBMP.getWidth(), 0, 0, tempBMP.getWidth(), tempBMP.getHeight());
@@ -1104,7 +1172,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     void setDisplayPixels3(){
         try{
             JSONArray pixels_array = new JSONArray();
-            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannon);
+            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannone_pos3);
             tempBMP=Bitmap.createScaledBitmap(tempBMP,32,32,false);
             int[]pixels = new int [tempBMP.getHeight()*tempBMP.getWidth()];
             tempBMP.getPixels(pixels, 0, tempBMP.getWidth(), 0, 0, tempBMP.getWidth(), tempBMP.getHeight());
@@ -1132,7 +1200,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     void setDisplayPixels4(){
         try{
             JSONArray pixels_array = new JSONArray();
-            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannon);
+            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannone_pos4);
             tempBMP=Bitmap.createScaledBitmap(tempBMP,32,32,false);
             int[]pixels = new int [tempBMP.getHeight()*tempBMP.getWidth()];
             tempBMP.getPixels(pixels, 0, tempBMP.getWidth(), 0, 0, tempBMP.getWidth(), tempBMP.getHeight());
@@ -1160,7 +1228,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     void setDisplayPixels5(){
         try{
             JSONArray pixels_array = new JSONArray();
-            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannon);
+            Bitmap tempBMP = BitmapFactory.decodeResource(getResources(),R.drawable.cannone_pos5);
             tempBMP=Bitmap.createScaledBitmap(tempBMP,32,32,false);
             int[]pixels = new int [tempBMP.getHeight()*tempBMP.getWidth()];
             tempBMP.getPixels(pixels, 0, tempBMP.getWidth(), 0, 0, tempBMP.getWidth(), tempBMP.getHeight());

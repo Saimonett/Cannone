@@ -23,6 +23,7 @@
         <activity android:name=".RankingsActivity"></activity>
         <activity android:name=".InstructionesActivity"></activity>
         <activity android:name=".GameOver"></activity>
+        <activity android:name=".MainActivity2" />
     </application>
 
 </manifest>
