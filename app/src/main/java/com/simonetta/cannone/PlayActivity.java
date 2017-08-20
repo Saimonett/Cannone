@@ -1128,19 +1128,30 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
     private void gameOver(){
        // Log.d("TickGameOver","tickGameOver");
         punteggioTotale=punteggio1+punteggio2+punteggio3+punteggio4+punteggio5;
-        if (punteggioTotale>1000){
+        if (punteggioTotale>1500){
             Intent activity_game = new Intent(PlayActivity.this, GameOver.class);
             activity_game.putExtra("messagePunti", punteggioTotale);
             startActivity(activity_game);
             finish();
         }
 
-        if (punteggioTotale<=1000) {
+        if (punteggioTotale<=1500) {
             Intent activity_game2 = new Intent(PlayActivity.this, GameOver2.class);
             activity_game2.putExtra("messagePunti2", punteggioTotale);
             startActivity(activity_game2);
             finish();
         }
+
+        if (punteggioTotale>300 && punteggioTotale<800){
+            coloraAnello1();
+        }
+        if (punteggioTotale>=800 && punteggioTotale<1500){
+            coloraAnello2();
+        }
+        if (punteggioTotale>=1500){
+            coloraAnello3();
+        }
+
 
        // punteggioTotale=0;
 
@@ -1317,6 +1328,150 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                 ragnatela[i][2]=0;
                 ragnatela[i][3]=0;
               }
+            try{
+                tmp_a1.put("a", ragnatela[i][0]);
+                tmp_a1.put("r", ragnatela[i][1]);
+                tmp_a1.put("g", ragnatela[i][2]);
+                tmp_a1.put("b", ragnatela[i][3]);
+
+                tmp_anello.put(tmp_a1);
+            } catch (JSONException exception) {
+                // No errors expected here
+            }
+        }
+
+        for(int j=0;j<(l_primo_t/2);j++){
+            mezzo_proiettile = setProiettileTot(j);
+        }
+        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+
+        //il secondo parametro di postDeleayed indica quanto tempo passa (in millisec) tra un'invocazione e la successiva
+
+    }
+    void coloraAnello1(){
+
+        JSONArray tmp_anello = new JSONArray();
+        JSONObject tmp_a1 = new JSONObject();
+
+//faccio gli anelli con il buco
+        for (int i = 0; i <1072; i++) {
+            if (i>=0 && i<522){
+                ragnatela[i][0]=255;
+                ragnatela[i][1]=0;
+                ragnatela[i][2]=0;
+                ragnatela[i][3]=0;
+            } else if(i>=522 && i<612) {
+                ragnatela[i][0]=255;
+                ragnatela[i][1]=255;
+                ragnatela[i][2]=0;
+                ragnatela[i][3]=0;
+            }else if (i>=613 && i<=790){
+                ragnatela[i][0]=255;
+                ragnatela[i][1]=0;
+                ragnatela[i][2]=0;
+                ragnatela[i][3]=0;
+            } else if (i>790 && i<1072){
+                ragnatela[i][0]=255;
+                ragnatela[i][1]=0;
+                ragnatela[i][2]=0;
+                ragnatela[i][3]=0;
+            }
+            try{
+                tmp_a1.put("a", ragnatela[i][0]);
+                tmp_a1.put("r", ragnatela[i][1]);
+                tmp_a1.put("g", ragnatela[i][2]);
+                tmp_a1.put("b", ragnatela[i][3]);
+
+                tmp_anello.put(tmp_a1);
+            } catch (JSONException exception) {
+                // No errors expected here
+            }
+        }
+
+        for(int j=0;j<(l_primo_t/2);j++){
+            mezzo_proiettile = setProiettileTot(j);
+        }
+        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+
+        //il secondo parametro di postDeleayed indica quanto tempo passa (in millisec) tra un'invocazione e la successiva
+
+    }
+    void coloraAnello2(){
+
+        JSONArray tmp_anello = new JSONArray();
+        JSONObject tmp_a1 = new JSONObject();
+
+//faccio gli anelli con il buco
+        for (int i = 0; i <1072; i++) {
+            if (i>=0 && i<522){
+                ragnatela[i][0]=255;
+                ragnatela[i][1]=0;
+                ragnatela[i][2]=0;
+                ragnatela[i][3]=0;
+            } else if(i>=522 && i<612) {
+                ragnatela[i][0]=255;
+                ragnatela[i][1]=255;
+                ragnatela[i][2]=0;
+                ragnatela[i][3]=0;
+            }else if (i>=613 && i<=790){
+                ragnatela[i][0]=255;
+                ragnatela[i][1]=0;
+                ragnatela[i][2]=255;
+                ragnatela[i][3]=0;
+            } else if (i>790 && i<1072){
+                ragnatela[i][0]=255;
+                ragnatela[i][1]=0;
+                ragnatela[i][2]=0;
+                ragnatela[i][3]=0;
+            }
+            try{
+                tmp_a1.put("a", ragnatela[i][0]);
+                tmp_a1.put("r", ragnatela[i][1]);
+                tmp_a1.put("g", ragnatela[i][2]);
+                tmp_a1.put("b", ragnatela[i][3]);
+
+                tmp_anello.put(tmp_a1);
+            } catch (JSONException exception) {
+                // No errors expected here
+            }
+        }
+
+        for(int j=0;j<(l_primo_t/2);j++){
+            mezzo_proiettile = setProiettileTot(j);
+        }
+        handleNetworkRequest(NetworkThread.SET_PIXELS, mezzo_proiettile, 0, 0);
+
+        //il secondo parametro di postDeleayed indica quanto tempo passa (in millisec) tra un'invocazione e la successiva
+
+    }
+    void coloraAnello3(){
+
+        JSONArray tmp_anello = new JSONArray();
+        JSONObject tmp_a1 = new JSONObject();
+
+//faccio gli anelli con il buco
+        for (int i = 0; i <1072; i++) {
+            if (i>=0 && i<522){
+                ragnatela[i][0]=255;
+                ragnatela[i][1]=0;
+                ragnatela[i][2]=0;
+                ragnatela[i][3]=0;
+            } else if(i>=522 && i<612) {
+                ragnatela[i][0]=255;
+                ragnatela[i][1]=255;
+                ragnatela[i][2]=0;
+                ragnatela[i][3]=0;
+            }else if (i>=613 && i<=790){
+                ragnatela[i][0]=255;
+                ragnatela[i][1]=0;
+                ragnatela[i][2]=255;
+                ragnatela[i][3]=0;
+            } else if (i>790 && i<1072){
+                ragnatela[i][0]=255;
+                ragnatela[i][1]=0;
+                ragnatela[i][2]=0;
+                ragnatela[i][3]=255;
+            }
             try{
                 tmp_a1.put("a", ragnatela[i][0]);
                 tmp_a1.put("r", ragnatela[i][1]);
