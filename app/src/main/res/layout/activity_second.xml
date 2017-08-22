@@ -13,14 +13,14 @@
         android:orientation="vertical">
 
 
-        <TextView
+        <ImageView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="367dp"
             android:layout_gravity="center"
-            android:layout_weight="5"
+            android:layout_weight="0.10"
             android:gravity="center"
-            android:text="Cannon"
+            android:src="@drawable/Icon2_DID_1_250px_text"
             android:textColor="@color/White"
             android:textSize="50dp"
             android:textStyle="bold" />
