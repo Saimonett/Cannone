@@ -31,9 +31,9 @@ public class RectPlayer implements GameObject {
         this.color=color;
 
         BitmapFactory bf =new BitmapFactory();
-        Bitmap idleImg=bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(),R.drawable.alienblue);
-        Bitmap walk1=bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(),R.drawable.alienblue_walk1);
-        Bitmap walk2=bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(),R.drawable.alienblue_walk2);
+        Bitmap idleImg=bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(),R.drawable.spider_2);
+        Bitmap walk1=bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(),R.drawable.spider_2);
+        Bitmap walk2=bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(),R.drawable.spider_2);
 
         idle=new Animation(new Bitmap[]{idleImg},2);
         walkRight=new Animation(new Bitmap[]{walk1,walk2},0.5f);
