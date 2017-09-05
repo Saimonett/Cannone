@@ -16,43 +16,10 @@
             android:layout_height="487dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:gravity="center"
             android:padding="28dp"
-            android:text="Per conquistare i rami della ragnatela spara il proiettile nel momento giusto"
-            android:textSize="40dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"/>
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.1"
-                android:src="@drawable/cerchio" />
-
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-
-                android:src="@drawable/cerchio_pieno"/>
-            <ImageView
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.1"
-                android:src="@drawable/cerchio"/>
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"/>
-        </LinearLayout>
+            android:text="Per conquistare i rami della ragnatela spara il proiettile in uno dei nodi, ruotando il cannone. Hai solo una possibilità a turno!"
+            android:textSize="22dp" />
 
     </LinearLayout>
 

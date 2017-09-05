@@ -118,6 +118,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
             case MotionEvent.ACTION_DOWN: {
                 //wheel.clearAnimation(); //secondo colpo torna a 0
                 mCurrAngle = Math.toDegrees(Math.atan2(y - yc,x-xc));
+                pos_cannone=0;
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
@@ -222,7 +223,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                             //qui bisogna sparare
                             Log.d("Sparo","Forza :"+level);
 
-                            if(pos_cannone==1 && ramo1shooted!=true)   {
+                            if(pos_cannone==1 && ramo1shooted==false)   {
                                 try {
 
                                     for(int j=0;j<(l_primo_t/15);j++){
@@ -235,7 +236,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 punteggio1=50;
                                 ramo1shooted=true;
                             }
-                            else if(pos_cannone==2 && ramo2shooted!=true)   {
+                            else if(pos_cannone==2 && ramo2shooted==false)   {
                                 try {
                                     int led_start_2 = l_primo_t + l_quinto_t + l_quarto_t + l_terzo_t;
                                     for(int j=0;j<(l_secondo_t/15);j++){
@@ -249,7 +250,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 ramo2shooted=true;
                             }
 
-                            if(pos_cannone==3 && ramo3shooted!=true)   {
+                            if(pos_cannone==3 && ramo3shooted==false)   {
                                 try {
                                     int led_start_3 = l_primo_t + l_quinto_t + l_quarto_t;
                                     for(int j=0;j<(l_terzo_t/15);j++){
@@ -262,7 +263,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 punteggio1=50;
                                 ramo3shooted=true;
                             }
-                            if(pos_cannone==4 && ramo4shooted!=true)   {
+                            if(pos_cannone==4 && ramo4shooted==false)   {
                                 try {
                                     int led_start_4 = l_primo_t + l_quinto_t;
                                     for(int j=0;j<(l_quarto_t/15);j++){
@@ -275,7 +276,7 @@ public class PlayActivity extends Activity implements OnTouchListener, Runnable{
                                 punteggio4=50;
                                 ramo4shooted=true;
                             }
-                            if(pos_cannone==5 && ramo5shooted!=true)   {
+                            if(pos_cannone==5 && ramo5shooted==false)   {
                                 try {
                                     for(int j=0;j<(l_quinto_t/15);j++){
                                         mezzo_proiettile = setProiettile5(l_primo_t,j);
